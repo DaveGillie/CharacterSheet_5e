@@ -1,7 +1,7 @@
 import tkinter as tk
 import customtkinter as ctk
-from save import *
 import os
+from save import *
 
 
 class AttributeFrame(ctk.CTkFrame):
@@ -172,10 +172,30 @@ class DeathSavesFrame(ctk.CTkFrame):
         f3.place(rely=.6, relx=.85, relwidth=.2)
 
 
+class ItemFrame(ctk.CTkFrame):
+    '''Upon creation this will automatically add itself to the data dict'''
+    def __init__(self, parent, data, **kwargs):
+        super().__init__(parent, **kwargs)
+
+        button = ctk.CTkButton(self, text='X', fg_color='red', width=30)
+        button.pack(side='left')
+        self.var_name = tk.StringVar()
+        name = ctk.CTkEntry(self, justify='center', textvariable=self.var_name)
+        name.pack(side='left')
+        self.description = ctk.CTkTextbox(self, height=100)
+        self.description.pack(side='left')
+
+        data[key_items].append({
+            key_name: self.var_name,
+            key_description: self.description
+        })
+
+
 class SheetTabs(ctk.CTkTabview):
     '''THIS IS WHERE THE MAGIC HAPPENS'''
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
+        self.configure(width=400, height=800)
 
         data = {}
 
@@ -384,6 +404,16 @@ class SheetTabs(ctk.CTkTabview):
         data[key_feat_trait] = feat_trait.text
 
         #################
+        #The Inventory tab
+        #################
+        self.add('Inventory')
+        scroll_inv = ctk.CTkScrollableFrame(self.tab('Inventory'))
+        button_add = ctk.CTkButton(scroll_inv, text='Add', command=lambda: ItemFrame(scroll_inv, data).pack(side='bottom', pady=5))
+        button_add.pack()
+        scroll_inv.pack(expand=True, fill='both')
+        data[key_items] = [] #initialize to empty list
+
+        #################
         #The File... tab
         #################
         self.add("File...")
@@ -493,6 +523,13 @@ class SheetTabs(ctk.CTkTabview):
             #features and traits
             feat_trait.text.insert('0.0', saved.get(key_feat_trait, s) )
 
+            #items
+            for saved_item in saved.get(key_items):
+                item_frame = ItemFrame(scroll_inv, data)
+                item_frame.pack(side='bottom', pady=5)
+                item_frame.var_name.set( saved_item[key_name] )
+                item_frame.description.insert('0.0', saved_item[key_description] )
+
 
 class App(ctk.CTk):
     def __init__(self):
@@ -511,4 +548,5 @@ if __name__ == '__main__':
     ha_height = int(a_height / 2)
     app.geometry(f'{a_width}x{a_height}+{hs_width - ha_width}+{hs_height - ha_height}')
     app.minsize(width=800, height=600)
+    app.title('Character Sheet')
     app.mainloop()

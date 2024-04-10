@@ -56,6 +56,10 @@ key_failure_3 = 'failure_3'
 
 key_feat_trait = 'feat_trait'
 
+key_items = 'items'
+key_name = 'name'
+key_description = 'description'
+
 
 def save(data):
     '''Expect data to be a dictionary with specific structure'''
@@ -200,8 +204,17 @@ def save(data):
         key_failure_1: data[key_failure_1].get(),
         key_failure_2: data[key_failure_2].get(),
         key_failure_3: data[key_failure_3].get(),
-        key_feat_trait: data[key_feat_trait].get('0.0','end-1c')
+        key_feat_trait: data[key_feat_trait].get('0.0','end-1c'),
+        key_items: []
     }
+
+    if data.get(key_items) != None:
+        for item in data[key_items]:
+            write[key_items].append({
+                key_name: item[key_name].get(),
+                key_description: item[key_description].get('0.0','end-1c')
+            })
+
     with open('data.json', 'w') as f:
         f.write(json.dumps(write, indent='    '))
 
