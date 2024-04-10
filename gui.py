@@ -177,19 +177,17 @@ class ItemFrame(ctk.CTkFrame):
     def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
 
-        button = ctk.CTkButton(self, text='X', fg_color='red', text_color='black', width=30)
+        button = ctk.CTkButton(self, text='X', fg_color='red', text_color='black', width=30, command=self.remove)
         button.pack(side='left')
         self.var_name = tk.StringVar()
         name = ctk.CTkEntry(self, justify='center', textvariable=self.var_name)
         name.pack(side='left', expand=True, fill='x')
         self.description = ctk.CTkTextbox(self, height=100)
-        self.description.pack(side='left')
+        self.description.pack(side='left', expand=True, fill='x')
 
         self.data = data
         data[key_items].append(self)
         self.cached_index = len(data[key_items]) - 1
-
-        button.configure(command=self.remove)
 
     def remove(self):
         '''
@@ -231,11 +229,44 @@ class MoneyFrame(ctk.CTkFrame):
         self.gold.pack(side='left', padx=5)
 
 
+class JournalFrame(ctk.CTkFrame):
+    '''Upon creation this will automatically add itself to the data dict'''
+    def __init__(self, parent, data, **kwargs):
+        super().__init__(parent, **kwargs)
+
+        button = ctk.CTkButton(self, text='X', fg_color='red', text_color='black', width=30, command=self.remove)
+        button.pack(side='left')
+        self.var_title = tk.StringVar()
+        name = ctk.CTkEntry(self, justify='center', textvariable=self.var_title)
+        name.pack(side='left')
+        self.note = ctk.CTkTextbox(self, height=120)
+        self.note.pack(side='left', expand=True, fill='x')
+
+        self.data = data
+        data[key_journal].append(self)
+        self.cached_index = len(data[key_journal]) - 1
+
+    def remove(self):
+        '''
+        1) remove this journal entry from the list
+        2) update all the other cached_index
+        3) remove this journal entry from the gui
+        '''
+        if messagebox.askyesno(title='WARNING!', message=f'Remove {self.var_title.get().upper()} from your journal?'):
+            #1) remove this journal entry from the list
+            del self.data[key_journal][self.cached_index]
+            #2) update all the other cached_index
+            for i in range(len(self.data[key_journal])):
+                self.data[key_journal][i].cached_index = i
+            #3) remove this journal entry from the gui
+            self.destroy()
+
+
 class SheetTabs(ctk.CTkTabview):
     '''THIS IS WHERE THE MAGIC HAPPENS'''
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
-        self.configure(width=500, height=800)
+        self.configure(width=600, height=800)
 
         data = {}
 
@@ -466,6 +497,18 @@ class SheetTabs(ctk.CTkTabview):
         data[key_gold] = money_frame.gold.var_amount
 
         #################
+        #The Journal tab
+        #################
+        self.add('Journal')
+        scroll_journal = ctk.CTkScrollableFrame(self.tab('Journal'))
+        button_add = ctk.CTkButton(scroll_journal,
+                                   text='Add',
+                                   command=lambda: JournalFrame(scroll_journal, data).pack(side='bottom', expand=True, fill='x', pady=5))
+        button_add.pack()
+        scroll_journal.pack(expand=True, fill='both')
+        data[key_journal] = [] #initialize to empty list
+
+        #################
         #The File... tab
         #################
         self.add("File...")
@@ -575,17 +618,26 @@ class SheetTabs(ctk.CTkTabview):
             #features and traits
             feat_trait.text.insert('0.0', saved.get(key_feat_trait, s) )
 
-            #items
-            for saved_item in saved.get(key_items):
-                item_frame = ItemFrame(scroll_inv, data)
-                item_frame.pack(side='bottom', expand=True, fill='x', pady=5)
-                item_frame.var_name.set( saved_item[key_name] )
-                item_frame.description.insert('0.0', saved_item[key_description] )
-
             #money
             money_frame.copper.var_amount.set( saved.get(key_copper, s) )
             money_frame.silver.var_amount.set( saved.get(key_silver, s) )
             money_frame.gold.var_amount.set( saved.get(key_gold, s) )
+
+            #items
+            if saved.get(key_items) != None:
+                for saved_item in saved.get(key_items):
+                    item_frame = ItemFrame(scroll_inv, data)
+                    item_frame.pack(side='bottom', expand=True, fill='x', pady=5)
+                    item_frame.var_name.set( saved_item[key_name] )
+                    item_frame.description.insert('0.0', saved_item[key_description] )
+
+            #journal
+            if saved.get(key_journal) != None:
+                for saved_entry in saved.get(key_journal):
+                    journal_frame = JournalFrame(scroll_journal, data)
+                    journal_frame.pack(side='bottom', expand=True, fill='x', pady=5)
+                    journal_frame.var_title.set( saved_entry[key_title] )
+                    journal_frame.note.insert('0.0', saved_entry[key_note] )
 
 
 class App(ctk.CTk):

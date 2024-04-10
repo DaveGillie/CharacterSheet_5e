@@ -64,6 +64,10 @@ key_copper = 'copper'
 key_silver = 'silver'
 key_gold = 'gold'
 
+key_journal = 'journal'
+key_title = 'title'
+key_note = 'note'
+
 
 def save(data):
     '''Expect data to be a dictionary with specific structure'''
@@ -212,15 +216,24 @@ def save(data):
         key_items: [],
         key_copper: data[key_copper].get(),
         key_silver: data[key_silver].get(),
-        key_gold: data[key_gold].get()
+        key_gold: data[key_gold].get(),
+        key_journal: []
     }
 
     #POPULATE THE ITEMS
     if data.get(key_items) != None:
-        for item in data[key_items]:
+        for entry in data[key_items]:
             write[key_items].append({
-                key_name: item.var_name.get(),
-                key_description: item.description.get('0.0','end-1c')
+                key_name: entry.var_name.get(),
+                key_description: entry.description.get('0.0','end-1c')
+            })
+
+    #POPULATE THE JOURNAL
+    if data.get(key_journal) != None:
+        for entry in data[key_journal]:
+            write[key_journal].append({
+                key_title: entry.var_title.get(),
+                key_note: entry.note.get('0.0','end-1c')
             })
 
     with open('data.json', 'w') as f:

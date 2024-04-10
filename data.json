@@ -192,5 +192,51 @@
     ],
     "copper": "5",
     "silver": "38",
-    "gold": "323"
+    "gold": "323",
+    "journal": [
+        {
+            "title": "Groups",
+            "note": "Watchful Order of Mages and Protectors\nGrey Hands"
+        },
+        {
+            "title": "Hlam (seer)",
+            "note": "Monk seer in cave on side of waterdeep.\nDislikes people.\n\"Snakes twin hides face for now, expect to change before winter's end\""
+        },
+        {
+            "title": "NPCs",
+            "note": "Grenda Garloth = Xanathar gladitorial games\n\nRenare Neverember=Son of Dagult (former openlord)\n\nVajra Safahr=\"The Black Staff\"\n\nBojentra Summerdean=head of the watch\n\nFel'rekt Lafeend=keeps hunting us. Drow?"
+        },
+        {
+            "title": "Stone of Galor",
+            "note": "Key to Neverember's Enigma.\nRequires attunement.\nEyes go in holes.\nCan erase memory of something from everyone in its current plane except caster. Also wiped from history books.\nRequires incence infused with blood of Aboleth and 4 ivory strips worth at least 50 gp each.\nOnce attuned, can ask it questions about what it has erased."
+        },
+        {
+            "title": "Xanathar",
+            "note": "Gazers (watcher thing)"
+        },
+        {
+            "title": "Zhentarim",
+            "note": "Snakes.\nBlamed for the attack on the Growlhounds."
+        },
+        {
+            "title": "Nimblewrights",
+            "note": "Sold by captain Zord (drow)\nTemple of Gond = feathers\nLord Abdar = dark eyes\nThe Watch = featureless\nGrowlhound family = dead"
+        },
+        {
+            "title": "Rynna",
+            "note": "gods != patrons. More powerful means less direct.\nPatrons tend to be fey, devils, and undead.\nHers seems to be undead (probably vampire).\nBut her form of dread has scales?\nShe is a \"hollow one\" which is a mortal killed in a place with much evil and brought back to life but the soul is not with the body.\nWarlock pacts end on the death of the mortal, so Rynna's part of the contract is fulfilled.  She still has the powers though, so the contract is still active.  This is strange.  The patron may not know what is going on either."
+        },
+        {
+            "title": "The Dragon",
+            "note": "Young bronze dragon named Zelifarn"
+        },
+        {
+            "title": "Castlelanters",
+            "note": "Ran afoul with Asmodian cultists."
+        },
+        {
+            "title": "Our Bar",
+            "note": "Ghost Bartender \"Lif\"\nLilian = tea lady & bartender\nThe Theas = servers\nRenardo = wizard pastries\nIsgrad/Dupere = cooks"
+        }
+    ]
 }
