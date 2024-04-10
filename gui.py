@@ -177,7 +177,7 @@ class ItemFrame(ctk.CTkFrame):
     def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
 
-        button = ctk.CTkButton(self, text='X', fg_color='red', width=30)
+        button = ctk.CTkButton(self, text='X', fg_color='red', text_color='black', width=30)
         button.pack(side='left')
         self.var_name = tk.StringVar()
         name = ctk.CTkEntry(self, justify='center', textvariable=self.var_name)
