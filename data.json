@@ -1,0 +1,143 @@
+{
+    "strength": {
+        "modifier": "-1",
+        "value": "8"
+    },
+    "dexterity": {
+        "modifier": "+2",
+        "value": "14"
+    },
+    "constitution": {
+        "modifier": "+2",
+        "value": "14"
+    },
+    "intelligence": {
+        "modifier": "+4",
+        "value": "18"
+    },
+    "wisdom": {
+        "modifier": "+1",
+        "value": "12"
+    },
+    "charisma": {
+        "modifier": "0",
+        "value": "10"
+    },
+    "saving_throws": {
+        "strength": {
+            "proficient": false,
+            "bonus": "-1"
+        },
+        "dexterity": {
+            "proficient": false,
+            "bonus": "+2"
+        },
+        "constitution": {
+            "proficient": false,
+            "bonus": "+2"
+        },
+        "intelligence": {
+            "proficient": true,
+            "bonus": "+6"
+        },
+        "wisdom": {
+            "proficient": true,
+            "bonus": "+3"
+        },
+        "charisma": {
+            "proficient": false,
+            "bonus": "+0"
+        },
+        "modifiers": "Advantage on INT Against Magic (Gnome Cunning)\nAdvantage on WIS Against Magic (Gnome Cunning)\nAdvantage on CHA Against Magic (Gnome Cunning)"
+    },
+    "initiative": "+6",
+    "armor_class": "12",
+    "proficiency": "+2",
+    "inspiration": "1",
+    "proficiencies": "===LANGUAGES===\nCommon, Draconic, Dwarvish\n\n===WEAPONS===\nLight Crossbow, Dagger, Dart, Quarterstaff, Sling\n\n===TOOLS===\nDrum, Tinker's Tools",
+    "skills": {
+        "acrobatics": {
+            "proficient": false,
+            "bonus": "+2"
+        },
+        "animal_handling": {
+            "proficient": false,
+            "bonus": "+1"
+        },
+        "arcana": {
+            "proficient": true,
+            "bonus": "+6"
+        },
+        "athletics": {
+            "proficient": false,
+            "bonus": "-1"
+        },
+        "deception": {
+            "proficient": false,
+            "bonus": "+0"
+        },
+        "history": {
+            "proficient": true,
+            "bonus": "+6"
+        },
+        "insight": {
+            "proficient": true,
+            "bonus": "+3"
+        },
+        "intimidation": {
+            "proficient": false,
+            "bonus": "+0"
+        },
+        "investigation": {
+            "proficient": true,
+            "bonus": "+6"
+        },
+        "medicine": {
+            "proficient": false,
+            "bonus": "+1"
+        },
+        "nature": {
+            "proficient": false,
+            "bonus": "+4"
+        },
+        "perception": {
+            "proficient": false,
+            "bonus": "+1"
+        },
+        "performance": {
+            "proficient": false,
+            "bonus": "+0"
+        },
+        "persuasion": {
+            "proficient": false,
+            "bonus": "+0"
+        },
+        "religion": {
+            "proficient": false,
+            "bonus": "+4"
+        },
+        "sleight_of_hand": {
+            "proficient": false,
+            "bonus": "+2"
+        },
+        "stealth": {
+            "proficient": false,
+            "bonus": "+2"
+        },
+        "survival": {
+            "proficient": false,
+            "bonus": "+1"
+        }
+    },
+    "max_hp": "26",
+    "temp_hp": "0",
+    "current_hp": "26",
+    "hit_dice": "4",
+    "success_1": false,
+    "success_2": false,
+    "success_3": false,
+    "failure_1": false,
+    "failure_2": false,
+    "failure_3": false,
+    "feat_trait": "Darkvision 60ft\n\n===ARCANE RECOVERY===\nOnce per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.\n\n===CHRONAL SHIFT===\nStarting at 2nd level, you can magically exert limited control over the flow of time around a creature. As a reaction, after you or a creature you can see within 30 feet of you makes an attack roll, an ability check, or a saving throw, you can force the creature to reroll. You make this decision after you see whether the roll succeeds or fails. The target must use the result of the second roll.\nYou can use this ability twice, and you regain any expended uses when you finish a long rest.\n\n===TEMPORAL AWARENESS===\nStarting at 2nd level, you can add your Intelligence modifier to your initiative rolls.\n\n===MOMENTARY STASIS===\nStarting at 6th level, as an action, you can magically force a Large or smaller creature you can see within 60 feet of you to make a Constitution saving throw against your spell save DC. Unless the saving throw is a success, the creature is encased in a field of magical energy until the end of your next turn or until the creature takes any damage. While encased in this way, the creature is incapacitated and has a speed of 0.\nYou can use this feature a number of times equal to your Intelligence modifier (a minimum of once). You regain all expended uses when you finish a long rest.\n\n===ARCANE ABEYANCE===\nBeginning at 10th level, when you cast a spell using a spell slot of 4th level or lower, you can condense the spell's magic into a mote. The spell is frozen in time at the moment of casting and held within a gray bead for 1 hour. This bead is a Tiny object with AC 15 and 1 hit point, and it is immune to poison and psychic damage. When the duration ends, or if the bead is destroyed, it vanishes in a flash of light, and the spell is lost.\nA creature holding the bead can use its action to release the spell within, whereupon the bead disappears. The spell uses your spell attack bonus and save DC, and the spell treats the creature who released it as the caster for all other purposes.\nOnce you create a bead with this feature, you can't do so again until you finish a short or long rest.\n\n===CONVERGENT FUTURE===\nStarting at 14th level, you can peer through possible futures and magically pull one of them into events around you, ensuring a particular outcome. When you or a creature you can see within 60 feet of you makes an attack roll, an ability check, or a saving throw, you can use your reaction to ignore the die roll and decide whether the number rolled is the minimum needed to succeed or one less than that number (your choice).\nWhen you use this feature, you gain one level of exhaustion. Only by finishing a long rest can you remove a level of exhaustion gained in this way.\n\n===ARTIFICIER'S LORE===\nAdd twice your proficiency bonus to History checks related to magic items, alchemical objects, or technological devices. \n\n===TINKER===\nYou are proficient with tinker's tools and can use them to construct tiny clockwork devices."
+}

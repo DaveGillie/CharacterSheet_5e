@@ -378,6 +378,11 @@ class SheetTabs(ctk.CTkTabview):
         data[key_failure_2] = death_saves.failure_2
         data[key_failure_3] = death_saves.failure_3
 
+        #features traits
+        feat_trait = TextFrame(tab_stats, 'FEATURES & TRAITS')
+        feat_trait.grid(row=3, column=3, rowspan=3, sticky='nsew')
+        data[key_feat_trait] = feat_trait.text
+
         #################
         #The File... tab
         #################
@@ -484,6 +489,9 @@ class SheetTabs(ctk.CTkTabview):
             death_saves.failure_1.set( saved.get(key_failure_1, b) )
             death_saves.failure_2.set( saved.get(key_failure_2, b) )
             death_saves.failure_3.set( saved.get(key_failure_3, b) )
+
+            #features and traits
+            feat_trait.text.insert('0.0', saved.get(key_feat_trait, s) )
 
 
 class App(ctk.CTk):
