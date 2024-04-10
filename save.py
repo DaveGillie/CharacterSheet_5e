@@ -211,8 +211,8 @@ def save(data):
     if data.get(key_items) != None:
         for item in data[key_items]:
             write[key_items].append({
-                key_name: item[key_name].get(),
-                key_description: item[key_description].get('0.0','end-1c')
+                key_name: item.var_name.get(),
+                key_description: item.description.get('0.0','end-1c')
             })
 
     with open('data.json', 'w') as f:

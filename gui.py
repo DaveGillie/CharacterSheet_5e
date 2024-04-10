@@ -181,21 +181,33 @@ class ItemFrame(ctk.CTkFrame):
         button.pack(side='left')
         self.var_name = tk.StringVar()
         name = ctk.CTkEntry(self, justify='center', textvariable=self.var_name)
-        name.pack(side='left')
+        name.pack(side='left', expand=True, fill='x')
         self.description = ctk.CTkTextbox(self, height=100)
         self.description.pack(side='left')
 
-        data[key_items].append({
-            key_name: self.var_name,
-            key_description: self.description
-        })
+        self.data = data
+        data[key_items].append(self)
+        self.cached_index = len(data[key_items]) - 1
 
+        button.configure(command=self.remove)
+
+    def remove(self):
+        '''
+        1) remove this item from the list
+        2) update all the other cached_index
+        3) remove this item from the gui
+        '''
+        del self.data[key_items][self.cached_index]
+        for i in range(len(self.data[key_items])):
+            self.data[key_items][i].cached_index = i
+        self.destroy()
+            
 
 class SheetTabs(ctk.CTkTabview):
     '''THIS IS WHERE THE MAGIC HAPPENS'''
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
-        self.configure(width=400, height=800)
+        self.configure(width=500, height=800)
 
         data = {}
 
@@ -408,7 +420,9 @@ class SheetTabs(ctk.CTkTabview):
         #################
         self.add('Inventory')
         scroll_inv = ctk.CTkScrollableFrame(self.tab('Inventory'))
-        button_add = ctk.CTkButton(scroll_inv, text='Add', command=lambda: ItemFrame(scroll_inv, data).pack(side='bottom', pady=5))
+        button_add = ctk.CTkButton(scroll_inv,
+                                   text='Add',
+                                   command=lambda: ItemFrame(scroll_inv, data).pack(side='bottom', expand=True, fill='x', pady=5))
         button_add.pack()
         scroll_inv.pack(expand=True, fill='both')
         data[key_items] = [] #initialize to empty list
@@ -418,7 +432,7 @@ class SheetTabs(ctk.CTkTabview):
         #################
         self.add("File...")
         button_save = ctk.CTkButton(self.tab('File...'), text='Save', command=lambda: save(data))
-        button_save.pack()
+        button_save.pack(pady=5)
 
         #################
         #Load saved data
@@ -526,7 +540,7 @@ class SheetTabs(ctk.CTkTabview):
             #items
             for saved_item in saved.get(key_items):
                 item_frame = ItemFrame(scroll_inv, data)
-                item_frame.pack(side='bottom', pady=5)
+                item_frame.pack(side='bottom', expand=True, fill='x', pady=5)
                 item_frame.var_name.set( saved_item[key_name] )
                 item_frame.description.insert('0.0', saved_item[key_description] )
 
