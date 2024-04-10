@@ -184,6 +184,13 @@
         {
             "name": "Rope, Hempen",
             "description": "5 ft\n10 ft\n35 ft\n50 ft"
+        },
+        {
+            "name": "Unknown Amulet",
+            "description": "Use identify on it..."
         }
-    ]
+    ],
+    "copper": "5",
+    "silver": "38",
+    "gold": "323"
 }

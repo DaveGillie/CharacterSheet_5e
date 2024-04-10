@@ -198,11 +198,38 @@ class ItemFrame(ctk.CTkFrame):
         3) remove this item from the gui
         '''
         if messagebox.askyesno(title='WARNING!', message=f'Remove {self.var_name.get().upper()} from your inventory?'):
+            #1) remove this item from the list
             del self.data[key_items][self.cached_index]
+            #2) update all the other cached_index
             for i in range(len(self.data[key_items])):
                 self.data[key_items][i].cached_index = i
+            #3) remove this item from the gui
             self.destroy()
             
+
+class CurrencyFrame(ctk.CTkFrame):
+    def __init__(self, parent, currency, color='#ffffff', **kwargs):
+        super().__init__(parent, **kwargs)
+
+        label = ctk.CTkLabel(self, text=currency, text_color=color)
+        label.pack()
+
+        self.var_amount = tk.StringVar()
+        amount = ctk.CTkEntry(self, justify='center', textvariable=self.var_amount)
+        amount.pack()
+
+
+class MoneyFrame(ctk.CTkFrame):
+    def __init__(self, parent, **kwargs):
+        super().__init__(parent, **kwargs)
+
+        self.copper = CurrencyFrame(self, currency='COPPER', color='#B87333')
+        self.copper.pack(side='left', padx=5)
+        self.silver = CurrencyFrame(self, currency='SILVER', color='#C0C0C0')
+        self.silver.pack(side='left', padx=5)
+        self.gold = CurrencyFrame(self, currency='GOLD', color='#FFD700')
+        self.gold.pack(side='left', padx=5)
+
 
 class SheetTabs(ctk.CTkTabview):
     '''THIS IS WHERE THE MAGIC HAPPENS'''
@@ -429,6 +456,16 @@ class SheetTabs(ctk.CTkTabview):
         data[key_items] = [] #initialize to empty list
 
         #################
+        #The Money tab
+        #################
+        self.add('Money')
+        money_frame = MoneyFrame(self.tab('Money'))
+        money_frame.pack(pady=5)
+        data[key_copper] = money_frame.copper.var_amount
+        data[key_silver] = money_frame.silver.var_amount
+        data[key_gold] = money_frame.gold.var_amount
+
+        #################
         #The File... tab
         #################
         self.add("File...")
@@ -544,6 +581,11 @@ class SheetTabs(ctk.CTkTabview):
                 item_frame.pack(side='bottom', expand=True, fill='x', pady=5)
                 item_frame.var_name.set( saved_item[key_name] )
                 item_frame.description.insert('0.0', saved_item[key_description] )
+
+            #money
+            money_frame.copper.var_amount.set( saved.get(key_copper, s) )
+            money_frame.silver.var_amount.set( saved.get(key_silver, s) )
+            money_frame.gold.var_amount.set( saved.get(key_gold, s) )
 
 
 class App(ctk.CTk):
