@@ -197,10 +197,11 @@ class ItemFrame(ctk.CTkFrame):
         2) update all the other cached_index
         3) remove this item from the gui
         '''
-        del self.data[key_items][self.cached_index]
-        for i in range(len(self.data[key_items])):
-            self.data[key_items][i].cached_index = i
-        self.destroy()
+        if messagebox.askyesno(title='WARNING!', message=f'Remove {self.var_name.get().upper()} from your inventory?'):
+            del self.data[key_items][self.cached_index]
+            for i in range(len(self.data[key_items])):
+                self.data[key_items][i].cached_index = i
+            self.destroy()
             
 
 class SheetTabs(ctk.CTkTabview):
