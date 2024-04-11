@@ -415,10 +415,10 @@ class SpellSlotFrame(ctk.CTkFrame):
     def __init__(self, parent, top_label, bot_label, **kwargs):
         super().__init__(parent, **kwargs)
 
-        tl = ctk.CTkLabel(self, text=top_label, font=(None, 20))
+        tl = ctk.CTkLabel(self, text=top_label, font=(None, 15))
         tl.pack()
         self.var = tk.StringVar()
-        entry = ctk.CTkEntry(self, justify='center', width=30, textvariable=self.var)
+        entry = ctk.CTkEntry(self, justify='center', width=30, font=(None, 20), textvariable=self.var)
         entry.pack()
         bl = ctk.CTkLabel(self, text=bot_label, font=(None, 10))
         bl.pack()
@@ -495,7 +495,15 @@ class SpellSlotsBar(ctk.CTkFrame):
         }
 
 
-class SpellsFrame(ctk.CTkFrame):
+class SpellsFrame(ctk.CTkScrollableFrame):
+    def __init__(self, parent, data, **kwargs):
+        super().__init__(parent, **kwargs)
+
+        add = ctk.CTkButton(self, text='Add')
+        add.pack(pady=5)
+
+
+class SpellInfoFrame(ctk.CTkFrame):
     def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
 
@@ -504,6 +512,9 @@ class SpellsFrame(ctk.CTkFrame):
 
         self.slots = SpellSlotsBar(self, data=data)
         self.slots.pack(pady=5)
+
+        self.spells = SpellsFrame(self, data=data)
+        self.spells.pack(pady=5, expand=True, fill='both')
 
 
 class SheetTabs(ctk.CTkTabview):
@@ -646,7 +657,7 @@ class SheetTabs(ctk.CTkTabview):
         #The Spells tab
         #################
         self.add('Spells')
-        spells_frame = SpellsFrame(self.tab('Spells'), data=data)
+        spells_frame = SpellInfoFrame(self.tab('Spells'), data=data)
         spells_frame.pack(expand=True, fill='both')
 
         #################
