@@ -68,9 +68,18 @@ key_journal = 'journal'
 key_title = 'title'
 key_note = 'note'
 
+key_spell_stats = 'spell_stats'
+key_prepare = 'prepare'
+key_ability = 'ability'
+key_dc = 'dc'
+key_attack = 'attack'
+
 
 def save(data):
-    '''Expect data to be a dictionary with specific structure'''
+    '''
+    Expect data to be a dictionary with specific structure
+    This function converts the data dict into instances of values to write to file
+    '''
     write = {
         key_strength: {
             key_modifier: data[key_strength][key_modifier].get(),
@@ -217,7 +226,13 @@ def save(data):
         key_copper: data[key_copper].get(),
         key_silver: data[key_silver].get(),
         key_gold: data[key_gold].get(),
-        key_journal: []
+        key_journal: [],
+        key_spell_stats: {
+            key_prepare: data[key_spell_stats][key_prepare].get(),
+            key_ability: data[key_spell_stats][key_ability].get(),
+            key_dc: data[key_spell_stats][key_dc].get(),
+            key_attack: data[key_spell_stats][key_attack].get()
+        }
     }
 
     #POPULATE THE ITEMS

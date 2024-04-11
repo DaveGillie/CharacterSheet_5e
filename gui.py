@@ -74,7 +74,7 @@ class TextFrame(ctk.CTkFrame):
 
 
 class SavingThrowsFrame(ctk.CTkFrame):
-    def __init__(self, parent, **kwargs):
+    def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
         label = ctk.CTkLabel(self, text="SAVING THROWS")
         label.place(rely=0, relheight=.1, relwidth=1)
@@ -93,10 +93,38 @@ class SavingThrowsFrame(ctk.CTkFrame):
         self.modifiers = ctk.CTkTextbox(self)
         self.modifiers.place(rely=.7, relheight=.3, relwidth=1)
 
+        data[key_saving_throws] = {
+            key_strength: {
+                key_proficient: self.strength.var_prof,
+                key_bonus: self.strength.var_bonus
+            },
+            key_dexterity: {
+                key_proficient: self.dexterity.var_prof,
+                key_bonus: self.dexterity.var_bonus
+            },
+            key_constitution: {
+                key_proficient: self.constitution.var_prof,
+                key_bonus: self.constitution.var_bonus
+            },
+            key_intelligence: {
+                key_proficient: self.intelligence.var_prof,
+                key_bonus: self.intelligence.var_bonus
+            },
+            key_wisdom: {
+                key_proficient: self.wisdom.var_prof,
+                key_bonus: self.wisdom.var_bonus
+            },
+            key_charisma: {
+                key_proficient: self.charisma.var_prof,
+                key_bonus: self.charisma.var_bonus
+            },
+            key_modifiers: self.modifiers
+        }
+
 
 class SkillsFrame(ctk.CTkFrame):
     '''18 skills, 19 rows (1 for label). Use 20 rows for simplicty.'''
-    def __init__(self, parent, **kwargs):
+    def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
         label = ctk.CTkLabel(self, text="SKILLS")
         label.place(rely=0, relheight=.05, relwidth=1)
@@ -137,9 +165,84 @@ class SkillsFrame(ctk.CTkFrame):
         self.survival = BonusProfFrame(self, 'Survival (WIS)')
         self.survival.place(rely=.90, relheight=.05, relwidth=1)
 
+        data[key_skills] = {
+            key_acrobatics: {
+                key_proficient: self.acrobatics.var_prof,
+                key_bonus: self.acrobatics.var_bonus
+            },
+            key_animal_handling: {
+                key_proficient: self.animal_handling.var_prof,
+                key_bonus: self.animal_handling.var_bonus
+            },
+            key_arcana: {
+                key_proficient: self.arcana.var_prof,
+                key_bonus: self.arcana.var_bonus
+            },
+            key_athletics: {
+                key_proficient: self.athletics.var_prof,
+                key_bonus: self.athletics.var_bonus
+            },
+            key_decption: {
+                key_proficient: self.deception.var_prof,
+                key_bonus: self.deception.var_bonus
+            },
+            key_history: {
+                key_proficient: self.history.var_prof,
+                key_bonus: self.history.var_bonus
+            },
+            key_insight: {
+                key_proficient: self.insight.var_prof,
+                key_bonus: self.insight.var_bonus
+            },
+            key_intimidation: {
+                key_proficient: self.intimidation.var_prof,
+                key_bonus: self.intimidation.var_bonus
+            },
+            key_investigation: {
+                key_proficient: self.investigation.var_prof,
+                key_bonus: self.investigation.var_bonus
+            },
+            key_medicine: {
+                key_proficient: self.medicine.var_prof,
+                key_bonus: self.medicine.var_bonus
+            },
+            key_nature: {
+                key_proficient: self.nature.var_prof,
+                key_bonus: self.nature.var_bonus
+            },
+            key_perception: {
+                key_proficient: self.perception.var_prof,
+                key_bonus: self.perception.var_bonus
+            },
+            key_performance: {
+                key_proficient: self.performance.var_prof,
+                key_bonus: self.performance.var_bonus
+            },
+            key_persuasion: {
+                key_proficient: self.persuasion.var_prof,
+                key_bonus: self.persuasion.var_bonus
+            },
+            key_religion: {
+                key_proficient: self.religion.var_prof,
+                key_bonus: self.religion.var_bonus
+            },
+            key_sleight_of_hand: {
+                key_proficient: self.sleight_of_hand.var_prof,
+                key_bonus: self.sleight_of_hand.var_bonus
+            },
+            key_stealth: {
+                key_proficient: self.stealth.var_prof,
+                key_bonus: self.stealth.var_bonus
+            },
+            key_survival: {
+                key_proficient: self.survival.var_prof,
+                key_bonus: self.survival.var_bonus
+            }
+        }
+
 
 class DeathSavesFrame(ctk.CTkFrame):
-    def __init__(self, parent, **kwargs):
+    def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
         
         death_saves = ctk.CTkLabel(self, text='DEATH SAVES')
@@ -170,6 +273,13 @@ class DeathSavesFrame(ctk.CTkFrame):
         self.failure_3 = tk.BooleanVar()
         f3 = ctk.CTkCheckBox(self, text='', variable=self.failure_3)
         f3.place(rely=.6, relx=.85, relwidth=.2)
+
+        data[key_success_1] = self.success_1
+        data[key_success_2] = self.success_2
+        data[key_success_3] = self.success_3
+        data[key_failure_1] = self.failure_1
+        data[key_failure_2] = self.failure_2
+        data[key_failure_3] = self.failure_3
 
 
 class ItemFrame(ctk.CTkFrame):
@@ -218,7 +328,7 @@ class CurrencyFrame(ctk.CTkFrame):
 
 
 class MoneyFrame(ctk.CTkFrame):
-    def __init__(self, parent, **kwargs):
+    def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
 
         self.copper = CurrencyFrame(self, currency='COPPER', color='#B87333')
@@ -227,6 +337,10 @@ class MoneyFrame(ctk.CTkFrame):
         self.silver.pack(side='left', padx=5)
         self.gold = CurrencyFrame(self, currency='GOLD', color='#FFD700')
         self.gold.pack(side='left', padx=5)
+
+        data[key_copper] = self.copper.var_amount
+        data[key_silver] = self.silver.var_amount
+        data[key_gold] = self.gold.var_amount
 
 
 class JournalFrame(ctk.CTkFrame):
@@ -274,27 +388,34 @@ class SpellStatFrame(ctk.CTkFrame):
 
 
 class SpellStatsBar(ctk.CTkFrame):
-    def __init__(self, parent, **kwargs):
+    def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
 
-        prepare = SpellStatFrame(self, label='AMOUNT PREPARE')
-        prepare.pack(side='left')
+        self.prepare = SpellStatFrame(self, label='AMOUNT PREPARE')
+        self.prepare.pack(side='left')
 
-        ability = SpellStatFrame(self, label='SPELLCAST ABILITY')
-        ability.pack(side='left')
+        self.ability = SpellStatFrame(self, label='SPELLCAST ABILITY')
+        self.ability.pack(side='left')
 
-        dc = SpellStatFrame(self, label='SPELLSAVE DC')
-        dc.pack(side='left')
+        self.dc = SpellStatFrame(self, label='SPELLSAVE DC')
+        self.dc.pack(side='left')
 
-        attack = SpellStatFrame(self, label='ATTACK BONUS')
-        attack.pack(side='left')
+        self.attack = SpellStatFrame(self, label='ATTACK BONUS')
+        self.attack.pack(side='left')
+
+        data[key_spell_stats] = {
+            key_prepare: self.prepare.var,
+            key_ability: self.ability.var,
+            key_dc: self.dc.var,
+            key_attack: self.attack.var
+        }
 
 
 class SpellsFrame(ctk.CTkFrame):
     def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
 
-        self.stats = SpellStatsBar(self)
+        self.stats = SpellStatsBar(self, data=data)
         self.stats.pack()
 
 
@@ -375,113 +496,12 @@ class SheetTabs(ctk.CTkTabview):
         data[key_proficiencies] = misc_prof.text
 
         #saving throws
-        saving_throws = SavingThrowsFrame(tab_stats)
+        saving_throws = SavingThrowsFrame(tab_stats, data=data)
         saving_throws.grid(row=3, column=2, rowspan=3, sticky='nsew')
-        data[key_saving_throws] = {
-            key_strength: {
-                key_proficient: saving_throws.strength.var_prof,
-                key_bonus: saving_throws.strength.var_bonus
-            },
-            key_dexterity: {
-                key_proficient: saving_throws.dexterity.var_prof,
-                key_bonus: saving_throws.dexterity.var_bonus
-            },
-            key_constitution: {
-                key_proficient: saving_throws.constitution.var_prof,
-                key_bonus: saving_throws.constitution.var_bonus
-            },
-            key_intelligence: {
-                key_proficient: saving_throws.intelligence.var_prof,
-                key_bonus: saving_throws.intelligence.var_bonus
-            },
-            key_wisdom: {
-                key_proficient: saving_throws.wisdom.var_prof,
-                key_bonus: saving_throws.wisdom.var_bonus
-            },
-            key_charisma: {
-                key_proficient: saving_throws.charisma.var_prof,
-                key_bonus: saving_throws.charisma.var_bonus
-            },
-            key_modifiers: saving_throws.modifiers
-        }
 
         #skills
-        skills = SkillsFrame(tab_stats)
+        skills = SkillsFrame(tab_stats, data=data)
         skills.grid(row=0, column=1, rowspan=6, sticky='nsew')
-        data[key_skills] = {
-            key_acrobatics: {
-                key_proficient: skills.acrobatics.var_prof,
-                key_bonus: skills.acrobatics.var_bonus
-            },
-            key_animal_handling: {
-                key_proficient: skills.animal_handling.var_prof,
-                key_bonus: skills.animal_handling.var_bonus
-            },
-            key_arcana: {
-                key_proficient: skills.arcana.var_prof,
-                key_bonus: skills.arcana.var_bonus
-            },
-            key_athletics: {
-                key_proficient: skills.athletics.var_prof,
-                key_bonus: skills.athletics.var_bonus
-            },
-            key_decption: {
-                key_proficient: skills.deception.var_prof,
-                key_bonus: skills.deception.var_bonus
-            },
-            key_history: {
-                key_proficient: skills.history.var_prof,
-                key_bonus: skills.history.var_bonus
-            },
-            key_insight: {
-                key_proficient: skills.insight.var_prof,
-                key_bonus: skills.insight.var_bonus
-            },
-            key_intimidation: {
-                key_proficient: skills.intimidation.var_prof,
-                key_bonus: skills.intimidation.var_bonus
-            },
-            key_investigation: {
-                key_proficient: skills.investigation.var_prof,
-                key_bonus: skills.investigation.var_bonus
-            },
-            key_medicine: {
-                key_proficient: skills.medicine.var_prof,
-                key_bonus: skills.medicine.var_bonus
-            },
-            key_nature: {
-                key_proficient: skills.nature.var_prof,
-                key_bonus: skills.nature.var_bonus
-            },
-            key_perception: {
-                key_proficient: skills.perception.var_prof,
-                key_bonus: skills.perception.var_bonus
-            },
-            key_performance: {
-                key_proficient: skills.performance.var_prof,
-                key_bonus: skills.performance.var_bonus
-            },
-            key_persuasion: {
-                key_proficient: skills.persuasion.var_prof,
-                key_bonus: skills.persuasion.var_bonus
-            },
-            key_religion: {
-                key_proficient: skills.religion.var_prof,
-                key_bonus: skills.religion.var_bonus
-            },
-            key_sleight_of_hand: {
-                key_proficient: skills.sleight_of_hand.var_prof,
-                key_bonus: skills.sleight_of_hand.var_bonus
-            },
-            key_stealth: {
-                key_proficient: skills.stealth.var_prof,
-                key_bonus: skills.stealth.var_bonus
-            },
-            key_survival: {
-                key_proficient: skills.survival.var_prof,
-                key_bonus: skills.survival.var_bonus
-            }
-        }
 
         #max temp hp
         max_temp = LeftRightFrame(tab_stats, left='MAX HP', right='TEMP HP')
@@ -496,14 +516,8 @@ class SheetTabs(ctk.CTkTabview):
         data[key_hit_dice] = current_hit.var_right
 
         #death saves
-        death_saves = DeathSavesFrame(tab_stats)
+        death_saves = DeathSavesFrame(tab_stats, data=data)
         death_saves.grid(row=2, column=3, sticky='nsew')
-        data[key_success_1] = death_saves.success_1
-        data[key_success_2] = death_saves.success_2
-        data[key_success_3] = death_saves.success_3
-        data[key_failure_1] = death_saves.failure_1
-        data[key_failure_2] = death_saves.failure_2
-        data[key_failure_3] = death_saves.failure_3
 
         #features traits
         feat_trait = TextFrame(tab_stats, 'FEATURES & TRAITS')
@@ -526,11 +540,8 @@ class SheetTabs(ctk.CTkTabview):
         #The Money tab
         #################
         self.add('Money')
-        money_frame = MoneyFrame(self.tab('Money'))
+        money_frame = MoneyFrame(self.tab('Money'), data=data)
         money_frame.pack(pady=5)
-        data[key_copper] = money_frame.copper.var_amount
-        data[key_silver] = money_frame.silver.var_amount
-        data[key_gold] = money_frame.gold.var_amount
 
         #################
         #The Journal tab
@@ -548,8 +559,8 @@ class SheetTabs(ctk.CTkTabview):
         #The Spells tab
         #################
         self.add('Spells')
-        spell_stats = SpellsFrame(self.tab('Spells'), data=data)
-        spell_stats.pack(expand=True, fill='both')
+        spells_frame = SpellsFrame(self.tab('Spells'), data=data)
+        spells_frame.pack(expand=True, fill='both')
 
         #################
         #The File... tab
@@ -681,6 +692,12 @@ class SheetTabs(ctk.CTkTabview):
                     journal_frame.pack(side='bottom', expand=True, fill='x', pady=5)
                     journal_frame.var_title.set( saved_entry[key_title] )
                     journal_frame.note.insert('0.0', saved_entry[key_note] )
+
+            #spells
+            spells_frame.stats.prepare.var.set( saved.get(key_spell_stats, d).get(key_prepare, s) )
+            spells_frame.stats.ability.var.set( saved.get(key_spell_stats, d).get(key_ability, s) )
+            spells_frame.stats.dc.var.set( saved.get(key_spell_stats, d).get(key_dc, s) )
+            spells_frame.stats.attack.var.set( saved.get(key_spell_stats, d).get(key_attack, s) )
 
 
 class App(ctk.CTk):
