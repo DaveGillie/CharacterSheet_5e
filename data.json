@@ -276,5 +276,11 @@
         "lvl8_used": "",
         "lvl9_max": "",
         "lvl9_used": ""
-    }
+    },
+    "spells": [
+        {
+            "title": "1 Magic Missile",
+            "description": "3d4"
+        }
+    ]
 }

@@ -495,12 +495,72 @@ class SpellSlotsBar(ctk.CTkFrame):
         }
 
 
+class Spell:
+    def __init__(self):
+        self.index = -1
+        self.title = tk.StringVar()
+        self.description = ''
+
+
 class SpellsFrame(ctk.CTkScrollableFrame):
     def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
 
-        add = ctk.CTkButton(self, text='Add')
-        add.pack(pady=5)
+        self.spell_window = None
+        add_button = ctk.CTkButton(self, text='Add', command=self.add_spell)
+        add_button.pack(pady=5)
+
+        data[key_spells] = [] #initialize spells to empty list
+        self.data = data
+
+    def add_spell(self):
+        '''This opens the spell window for a new spell'''
+        self.make_spell_window()
+        spell = Spell()
+        title_label = ctk.CTkLabel(self.spell_window, text='TITLE')
+        title_label.pack()
+        title = ctk.CTkEntry(self.spell_window, justify='center', width=300, textvariable=spell.title)
+        title.pack()
+        ctk.CTkLabel(self.spell_window, text='').pack() #MAKE EMPTY SPACE WHILE USING PACK
+        description_label = ctk.CTkLabel(self.spell_window, text='DESCRIPTION')
+        description_label.pack()
+        description = ctk.CTkTextbox(self.spell_window, border_color='#5f6467', border_width=2)
+        description.configure(border_color='#5f6467', border_width=2)
+        description.pack(expand=True, fill='both', padx=30)
+        apply = ctk.CTkButton(self.spell_window, text='Apply', command=lambda: self.apply_spell(spell, description))
+        apply.pack(pady=30)
+
+    def apply_spell(self, spell, description):
+        '''This applies changes for new and existing spells'''
+        if spell.index == -1:
+            self.data[key_spells].append(spell)
+            spell.index = len(self.data[key_spells]) - 1
+        spell.description = description.get('0.0', 'end-1c')
+        self.spell_window.destroy()
+
+    def make_spell_window(self):
+        if self.spell_window != None:
+            return
+        self.spell_window = ctk.CTkToplevel(self)
+        hs_width = int(self.winfo_screenwidth() / 2)
+        hs_height = int(self.winfo_screenheight() / 2)
+        w_width = 600
+        w_height = 400
+        hw_width = int(w_width / 2)
+        hw_height = int(w_height / 2)
+        self.spell_window.geometry(f'{w_width}x{w_height}+{hs_width - hw_width}+{hs_height - hw_height}')
+        self.spell_window.resizable(width=True, height=True)
+        self.spell_window.minsize(width=w_width, height=w_height)
+        self.spell_window.title('Make a spell')
+        self.spell_window.bind('<FocusOut>', self.lost_focus)
+        self.spell_window.bind('<Destroy>', self.close_window)
+
+    def lost_focus(self, event):
+        self.spell_window.focus_force()
+
+    def close_window(self, event):
+        self.spell_window = None
+
 
 
 class SpellInfoFrame(ctk.CTkFrame):

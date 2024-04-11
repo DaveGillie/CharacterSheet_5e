@@ -58,14 +58,14 @@ key_feat_trait = 'feat_trait'
 
 key_items = 'items'
 key_name = 'name'
-key_description = 'description'
+key_description = 'description' #also used for spells
 
 key_copper = 'copper'
 key_silver = 'silver'
 key_gold = 'gold'
 
 key_journal = 'journal'
-key_title = 'title'
+key_title = 'title' #also used for spells
 key_note = 'note'
 
 key_spell_stats = 'spell_stats'
@@ -93,6 +93,8 @@ key_lvl8_max = 'lvl8_max'
 key_lvl8_used = 'lvl8_used'
 key_lvl9_max = 'lvl9_max'
 key_lvl9_used = 'lvl9_used'
+
+key_spells = 'spells'
 
 
 def save(data):
@@ -272,7 +274,8 @@ def save(data):
             key_lvl8_used: data[key_spell_slots][key_lvl8_used].get(),
             key_lvl9_max: data[key_spell_slots][key_lvl9_max].get(),
             key_lvl9_used: data[key_spell_slots][key_lvl9_used].get()
-        }
+        },
+        key_spells: []
     }
 
     #POPULATE THE ITEMS
@@ -289,6 +292,14 @@ def save(data):
             write[key_journal].append({
                 key_title: entry.var_title.get(),
                 key_note: entry.note.get('0.0','end-1c')
+            })
+
+    #POPULATE THE SPELLS
+    if data.get(key_spells) != None:
+        for spell in data.get(key_spells):
+            write[key_spells].append({
+                key_title: spell.title.get(),
+                key_description: spell.description
             })
 
     with open('data.json', 'w') as f:
