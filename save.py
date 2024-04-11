@@ -74,6 +74,26 @@ key_ability = 'ability'
 key_dc = 'dc'
 key_attack = 'attack'
 
+key_spell_slots = 'spell_slots'
+key_lvl1_max = 'lvl1_max'
+key_lvl1_used = 'lvl1_used'
+key_lvl2_max = 'lvl2_max'
+key_lvl2_used = 'lvl2_used'
+key_lvl3_max = 'lvl3_max'
+key_lvl3_used = 'lvl3_used'
+key_lvl4_max = 'lvl4_max'
+key_lvl4_used = 'lvl4_used'
+key_lvl5_max = 'lvl5_max'
+key_lvl5_used = 'lvl5_used'
+key_lvl6_max = 'lvl6_max'
+key_lvl6_used = 'lvl6_used'
+key_lvl7_max = 'lvl7_max'
+key_lvl7_used = 'lvl7_used'
+key_lvl8_max = 'lvl8_max'
+key_lvl8_used = 'lvl8_used'
+key_lvl9_max = 'lvl9_max'
+key_lvl9_used = 'lvl9_used'
+
 
 def save(data):
     '''
@@ -232,6 +252,26 @@ def save(data):
             key_ability: data[key_spell_stats][key_ability].get(),
             key_dc: data[key_spell_stats][key_dc].get(),
             key_attack: data[key_spell_stats][key_attack].get()
+        },
+        key_spell_slots: {
+            key_lvl1_max: data[key_spell_slots][key_lvl1_max].get(),
+            key_lvl1_used: data[key_spell_slots][key_lvl1_used].get(),
+            key_lvl2_max: data[key_spell_slots][key_lvl2_max].get(),
+            key_lvl2_used: data[key_spell_slots][key_lvl2_used].get(),
+            key_lvl3_max: data[key_spell_slots][key_lvl3_max].get(),
+            key_lvl3_used: data[key_spell_slots][key_lvl3_used].get(),
+            key_lvl4_max: data[key_spell_slots][key_lvl4_max].get(),
+            key_lvl4_used: data[key_spell_slots][key_lvl4_used].get(),
+            key_lvl5_max: data[key_spell_slots][key_lvl5_max].get(),
+            key_lvl5_used: data[key_spell_slots][key_lvl5_used].get(),
+            key_lvl6_max: data[key_spell_slots][key_lvl6_max].get(),
+            key_lvl6_used: data[key_spell_slots][key_lvl6_used].get(),
+            key_lvl7_max: data[key_spell_slots][key_lvl7_max].get(),
+            key_lvl7_used: data[key_spell_slots][key_lvl7_used].get(),
+            key_lvl8_max: data[key_spell_slots][key_lvl8_max].get(),
+            key_lvl8_used: data[key_spell_slots][key_lvl8_used].get(),
+            key_lvl9_max: data[key_spell_slots][key_lvl9_max].get(),
+            key_lvl9_used: data[key_spell_slots][key_lvl9_used].get()
         }
     }
 

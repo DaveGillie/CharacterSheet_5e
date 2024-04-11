@@ -411,12 +411,99 @@ class SpellStatsBar(ctk.CTkFrame):
         }
 
 
+class SpellSlotFrame(ctk.CTkFrame):
+    def __init__(self, parent, top_label, bot_label, **kwargs):
+        super().__init__(parent, **kwargs)
+
+        tl = ctk.CTkLabel(self, text=top_label, font=(None, 20))
+        tl.pack()
+        self.var = tk.StringVar()
+        entry = ctk.CTkEntry(self, justify='center', width=30, textvariable=self.var)
+        entry.pack()
+        bl = ctk.CTkLabel(self, text=bot_label, font=(None, 10))
+        bl.pack()
+
+
+class SpellSlotsBar(ctk.CTkFrame):
+    def __init__(self, parent, data, **kwargs):
+        super().__init__(parent, **kwargs)
+
+        self.lvl1_max = SpellSlotFrame(self, top_label='1', bot_label='MAX')
+        self.lvl1_max.pack(side='left', padx=2)
+        self.lvl1_used = SpellSlotFrame(self, top_label='1', bot_label='USED')
+        self.lvl1_used.pack(side='left', padx=2)
+
+        self.lvl2_max = SpellSlotFrame(self, top_label='2', bot_label='MAX')
+        self.lvl2_max.pack(side='left', padx=2)
+        self.lvl2_used = SpellSlotFrame(self, top_label='2', bot_label='USED')
+        self.lvl2_used.pack(side='left', padx=2)
+
+        self.lvl3_max = SpellSlotFrame(self, top_label='3', bot_label='MAX')
+        self.lvl3_max.pack(side='left', padx=2)
+        self.lvl3_used = SpellSlotFrame(self, top_label='3', bot_label='USED')
+        self.lvl3_used.pack(side='left', padx=2)
+
+        self.lvl4_max = SpellSlotFrame(self, top_label='4', bot_label='MAX')
+        self.lvl4_max.pack(side='left', padx=2)
+        self.lvl4_used = SpellSlotFrame(self, top_label='4', bot_label='USED')
+        self.lvl4_used.pack(side='left', padx=2)
+
+        self.lvl5_max = SpellSlotFrame(self, top_label='5', bot_label='MAX')
+        self.lvl5_max.pack(side='left', padx=2)
+        self.lvl5_used = SpellSlotFrame(self, top_label='5', bot_label='USED')
+        self.lvl5_used.pack(side='left', padx=2)
+
+        self.lvl6_max = SpellSlotFrame(self, top_label='6', bot_label='MAX')
+        self.lvl6_max.pack(side='left', padx=2)
+        self.lvl6_used = SpellSlotFrame(self, top_label='6', bot_label='USED')
+        self.lvl6_used.pack(side='left', padx=2)
+
+        self.lvl7_max = SpellSlotFrame(self, top_label='7', bot_label='MAX')
+        self.lvl7_max.pack(side='left', padx=2)
+        self.lvl7_used = SpellSlotFrame(self, top_label='7', bot_label='USED')
+        self.lvl7_used.pack(side='left', padx=2)
+
+        self.lvl8_max = SpellSlotFrame(self, top_label='8', bot_label='MAX')
+        self.lvl8_max.pack(side='left', padx=2)
+        self.lvl8_used = SpellSlotFrame(self, top_label='8', bot_label='USED')
+        self.lvl8_used.pack(side='left', padx=2)
+
+        self.lvl9_max = SpellSlotFrame(self, top_label='9', bot_label='MAX')
+        self.lvl9_max.pack(side='left', padx=2)
+        self.lvl9_used = SpellSlotFrame(self, top_label='9', bot_label='USED')
+        self.lvl9_used.pack(side='left', padx=2)
+
+        data[key_spell_slots] = {
+            key_lvl1_max: self.lvl1_max.var,
+            key_lvl1_used: self.lvl1_used.var,
+            key_lvl2_max: self.lvl2_max.var,
+            key_lvl2_used: self.lvl2_used.var,
+            key_lvl3_max: self.lvl3_max.var,
+            key_lvl3_used: self.lvl3_used.var,
+            key_lvl4_max: self.lvl4_max.var,
+            key_lvl4_used: self.lvl4_used.var,
+            key_lvl5_max: self.lvl5_max.var,
+            key_lvl5_used: self.lvl5_used.var,
+            key_lvl6_max: self.lvl6_max.var,
+            key_lvl6_used: self.lvl6_used.var,
+            key_lvl7_max: self.lvl7_max.var,
+            key_lvl7_used: self.lvl7_used.var,
+            key_lvl8_max: self.lvl8_max.var,
+            key_lvl8_used: self.lvl8_used.var,
+            key_lvl9_max: self.lvl9_max.var,
+            key_lvl9_used: self.lvl9_used.var
+        }
+
+
 class SpellsFrame(ctk.CTkFrame):
     def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
 
         self.stats = SpellStatsBar(self, data=data)
-        self.stats.pack()
+        self.stats.pack(pady=5)
+
+        self.slots = SpellSlotsBar(self, data=data)
+        self.slots.pack(pady=5)
 
 
 class SheetTabs(ctk.CTkTabview):
@@ -693,11 +780,31 @@ class SheetTabs(ctk.CTkTabview):
                     journal_frame.var_title.set( saved_entry[key_title] )
                     journal_frame.note.insert('0.0', saved_entry[key_note] )
 
-            #spells
+            #spell stats
             spells_frame.stats.prepare.var.set( saved.get(key_spell_stats, d).get(key_prepare, s) )
             spells_frame.stats.ability.var.set( saved.get(key_spell_stats, d).get(key_ability, s) )
             spells_frame.stats.dc.var.set( saved.get(key_spell_stats, d).get(key_dc, s) )
             spells_frame.stats.attack.var.set( saved.get(key_spell_stats, d).get(key_attack, s) )
+
+            #spell slots
+            spells_frame.slots.lvl1_max.var.set( saved.get(key_spell_slots, d).get(key_lvl1_max, s) )
+            spells_frame.slots.lvl1_used.var.set( saved.get(key_spell_slots, d).get(key_lvl1_used, s) )
+            spells_frame.slots.lvl2_max.var.set( saved.get(key_spell_slots, d).get(key_lvl2_max, s) )
+            spells_frame.slots.lvl2_used.var.set( saved.get(key_spell_slots, d).get(key_lvl2_used, s) )
+            spells_frame.slots.lvl3_max.var.set( saved.get(key_spell_slots, d).get(key_lvl3_max, s) )
+            spells_frame.slots.lvl3_used.var.set( saved.get(key_spell_slots, d).get(key_lvl3_used, s) )
+            spells_frame.slots.lvl4_max.var.set( saved.get(key_spell_slots, d).get(key_lvl4_max, s) )
+            spells_frame.slots.lvl4_used.var.set( saved.get(key_spell_slots, d).get(key_lvl4_used, s) )
+            spells_frame.slots.lvl5_max.var.set( saved.get(key_spell_slots, d).get(key_lvl5_max, s) )
+            spells_frame.slots.lvl5_used.var.set( saved.get(key_spell_slots, d).get(key_lvl5_used, s) )
+            spells_frame.slots.lvl6_max.var.set( saved.get(key_spell_slots, d).get(key_lvl6_max, s) )
+            spells_frame.slots.lvl6_used.var.set( saved.get(key_spell_slots, d).get(key_lvl6_used, s) )
+            spells_frame.slots.lvl7_max.var.set( saved.get(key_spell_slots, d).get(key_lvl7_max, s) )
+            spells_frame.slots.lvl7_used.var.set( saved.get(key_spell_slots, d).get(key_lvl7_used, s) )
+            spells_frame.slots.lvl8_max.var.set( saved.get(key_spell_slots, d).get(key_lvl8_max, s) )
+            spells_frame.slots.lvl8_used.var.set( saved.get(key_spell_slots, d).get(key_lvl8_used, s) )
+            spells_frame.slots.lvl9_max.var.set( saved.get(key_spell_slots, d).get(key_lvl9_max, s) )
+            spells_frame.slots.lvl9_used.var.set( saved.get(key_spell_slots, d).get(key_lvl9_used, s) )
 
 
 class App(ctk.CTk):

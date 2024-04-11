@@ -256,5 +256,25 @@
         "ability": "INT",
         "dc": "14",
         "attack": "+6"
+    },
+    "spell_slots": {
+        "lvl1_max": "4",
+        "lvl1_used": "3",
+        "lvl2_max": "3",
+        "lvl2_used": "1",
+        "lvl3_max": "",
+        "lvl3_used": "",
+        "lvl4_max": "",
+        "lvl4_used": "",
+        "lvl5_max": "",
+        "lvl5_used": "",
+        "lvl6_max": "",
+        "lvl6_used": "",
+        "lvl7_max": "",
+        "lvl7_used": "",
+        "lvl8_max": "",
+        "lvl8_used": "",
+        "lvl9_max": "",
+        "lvl9_used": ""
     }
 }
