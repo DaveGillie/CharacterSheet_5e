@@ -500,6 +500,7 @@ class Spell:
         self.index = -1
         self.title = tk.StringVar()
         self.description = ''
+        self.prepared = tk.BooleanVar()
 
 
 class SpellFrame(ctk.CTkFrame):
@@ -517,7 +518,7 @@ class SpellFrame(ctk.CTkFrame):
         spell_button = ctk.CTkButton(self, textvariable=spell.title, command=lambda: parent.view_spell_window(spell))
         spell_button.pack(side='left', expand=True, fill='x', padx=padx)
 
-        prepared = ctk.CTkCheckBox(self, text='prepared')
+        prepared = ctk.CTkCheckBox(self, text='PREPARED', variable=spell.prepared)
         prepared.pack(side='left', padx=padx)
 
 
@@ -934,6 +935,7 @@ class SheetTabs(ctk.CTkTabview):
                     spell = Spell()
                     spell.title.set( saved_spell.get(key_title, s)) 
                     spell.description = saved_spell.get(key_description, s)
+                    spell.prepared.set( saved_spell.get(key_prepared, b) )
                     spells_info_frame.spells_frame.load_spell(spell)
 
 

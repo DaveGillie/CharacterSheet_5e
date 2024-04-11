@@ -280,15 +280,18 @@
     "spells": [
         {
             "title": "1 Magic Missile",
-            "description": "3d4"
+            "description": "3d4 + 3",
+            "prepared": true
         },
         {
             "title": "1 Sleep",
-            "description": "zzzz"
+            "description": "zzzz",
+            "prepared": false
         },
         {
             "title": "top",
-            "description": "stuff in top"
+            "description": "prepared!",
+            "prepared": false
         }
     ]
 }

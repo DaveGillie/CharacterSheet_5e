@@ -95,6 +95,7 @@ key_lvl9_max = 'lvl9_max'
 key_lvl9_used = 'lvl9_used'
 
 key_spells = 'spells'
+key_prepared = 'prepared'
 
 
 def save(data):
@@ -299,7 +300,8 @@ def save(data):
         for spell in data.get(key_spells):
             write[key_spells].append({
                 key_title: spell.title.get(),
-                key_description: spell.description
+                key_description: spell.description,
+                key_prepared: spell.prepared.get()
             })
 
     with open('data.json', 'w') as f:
