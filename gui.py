@@ -262,6 +262,42 @@ class JournalFrame(ctk.CTkFrame):
             self.destroy()
 
 
+class SpellStatFrame(ctk.CTkFrame):
+    def __init__(self, parent, label, **kwargs):
+        super().__init__(parent, **kwargs)
+
+        l = ctk.CTkLabel(self, text=label)
+        l.pack()
+        self.var = tk.StringVar()
+        entry = ctk.CTkEntry(self, justify='center', textvariable=self.var)
+        entry.pack()
+
+
+class SpellStatsBar(ctk.CTkFrame):
+    def __init__(self, parent, **kwargs):
+        super().__init__(parent, **kwargs)
+
+        prepare = SpellStatFrame(self, label='AMOUNT PREPARE')
+        prepare.pack(side='left')
+
+        ability = SpellStatFrame(self, label='SPELLCAST ABILITY')
+        ability.pack(side='left')
+
+        dc = SpellStatFrame(self, label='SPELLSAVE DC')
+        dc.pack(side='left')
+
+        attack = SpellStatFrame(self, label='ATTACK BONUS')
+        attack.pack(side='left')
+
+
+class SpellsFrame(ctk.CTkFrame):
+    def __init__(self, parent, data, **kwargs):
+        super().__init__(parent, **kwargs)
+
+        self.stats = SpellStatsBar(self)
+        self.stats.pack()
+
+
 class SheetTabs(ctk.CTkTabview):
     '''THIS IS WHERE THE MAGIC HAPPENS'''
     def __init__(self, parent, **kwargs):
@@ -507,6 +543,13 @@ class SheetTabs(ctk.CTkTabview):
         button_add.pack()
         scroll_journal.pack(expand=True, fill='both')
         data[key_journal] = [] #initialize to empty list
+
+        #################
+        #The Spells tab
+        #################
+        self.add('Spells')
+        spell_stats = SpellsFrame(self.tab('Spells'), data=data)
+        spell_stats.pack(expand=True, fill='both')
 
         #################
         #The File... tab

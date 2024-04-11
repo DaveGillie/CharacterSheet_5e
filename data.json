@@ -237,6 +237,18 @@
         {
             "title": "Our Bar",
             "note": "Ghost Bartender \"Lif\"\nLilian = tea lady & bartender\nThe Theas = servers\nRenardo = wizard pastries\nIsgrad/Dupere = cooks"
+        },
+        {
+            "title": "Gazer",
+            "note": "Aberation\nArmor Class: 13\nHit Points: 13 (3d4 + 6)\nSpeed: , Can Hover\n\nSaving Throws: WIS +2\nSkills: Perception +4, Stealth +5\nCondition Immunities: Prone\nSenses: Darkvision 60 ft., Passive Perception 14"
+        },
+        {
+            "title": "Skeleton",
+            "note": "Undead\nArmor Class 13 (armor scraps)\nHit Points 13 (2d8 + 4)\nSpeed 30 ft.\n\nDamage Vulnerabilities Bludgeoning\nDamage Immunities Poison\nCondition Immunities Exhaustion, Poisoned\nSenses Darkvision 60 ft., Passive Perception 9"
+        },
+        {
+            "title": "Wraith",
+            "note": "Undead\nArmor Class 13\nHit Points 67 (9d8+27)\nSpeed 0 ft., fly 60 ft. (hover)\n\nDamage Resistance Acid, Cold, Fire, Lightning, Thunder; Bludgeoning, Piercing, and Slashing From Nonmagical Attacks That Aren't Silvered\nDamage Immunities Necrotic, Poison\nCondition Immunities Charmed, Exhaustion, Grappled, Paralyzed, Petrified, Poisoned, Prone, Restrained\nSenses Darkvision 60 Ft., passive Perception 12\nLanguages The Languages It Knew In Life\n\nIncorporeal Movement. The wraith can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object.\n\nSunlight Sensitivity. While in sunlight, the wraith has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
         }
     ]
 }
