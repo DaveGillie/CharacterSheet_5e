@@ -507,11 +507,14 @@ class SpellFrame(ctk.CTkFrame):
         super().__init__(parent, **kwargs)
 
         padx = 20
-
-        delete_button = ctk.CTkButton(self, text='X', text_color='black', fg_color='red', width=30)
+        delete_button = ctk.CTkButton(self,
+                                      text='X',
+                                      text_color='black',
+                                      fg_color='red',
+                                      width=30)
         delete_button.pack(side='left', padx=padx)
 
-        spell_button = ctk.CTkButton(self, text=spell.title.get())
+        spell_button = ctk.CTkButton(self, textvariable=spell.title, command=lambda: parent.view_spell_window(spell))
         spell_button.pack(side='left', expand=True, fill='x', padx=padx)
 
         prepared = ctk.CTkCheckBox(self, text='prepared')
@@ -523,15 +526,14 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         super().__init__(parent, **kwargs)
 
         self.spell_window = None
-        add_button = ctk.CTkButton(self, text='Add', command=self.add_spell)
+        add_button = ctk.CTkButton(self, text='Add', command=self.new_spell_window)
         add_button.pack(pady=20)
 
         data[key_spells] = [] #initialize spells to empty list
         self.data = data
-        self.spells = []
+        self.spell_frames = []
 
-    def add_spell(self):
-        '''This opens the spell window for a new spell'''
+    def new_spell_window(self):
         self.make_spell_window()
         spell = Spell()
         title_label = ctk.CTkLabel(self.spell_window, text='TITLE')
@@ -547,17 +549,34 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         apply = ctk.CTkButton(self.spell_window, text='Apply', command=lambda: self.apply_spell(spell, description))
         apply.pack(pady=30)
 
+    def view_spell_window(self, spell):
+        self.make_spell_window()
+        title_label = ctk.CTkLabel(self.spell_window, text='TITLE')
+        title_label.pack()
+        title = ctk.CTkEntry(self.spell_window, justify='center', width=300, textvariable=spell.title)
+        title.pack()
+        ctk.CTkLabel(self.spell_window, text='').pack() #MAKE EMPTY SPACE WHILE USING PACK
+        description_label = ctk.CTkLabel(self.spell_window, text='DESCRIPTION')
+        description_label.pack()
+        description = ctk.CTkTextbox(self.spell_window, border_color='#5f6467', border_width=2)
+        description.insert('0.0', spell.description)
+        description.configure(border_color='#5f6467', border_width=2)
+        description.pack(expand=True, fill='both', padx=30)
+        apply = ctk.CTkButton(self.spell_window, text='Apply', command=lambda: self.apply_spell(spell, description))
+        apply.pack(pady=30)
+
     def apply_spell(self, spell, description):
         '''This applies changes for new and existing spells'''
         #only append the spell if this is a new spell
+        spell.description = description.get('0.0', 'end-1c')
+        
         if spell.index == -1:
             self.data[key_spells].append(spell)
             spell.index = len(self.data[key_spells]) - 1
         
-        spell.description = description.get('0.0', 'end-1c')
-        spell_frame = SpellFrame(self, spell)
-        spell_frame.pack(side='bottom', padx=50, pady=10, expand=True, fill='x')
-        self.spells.append(spell_frame)
+            spell_frame = SpellFrame(self, spell)
+            spell_frame.pack(side='bottom', padx=50, pady=10, expand=True, fill='x')
+            self.spell_frames.append(spell_frame)
 
         self.spell_window.destroy()
 
@@ -569,7 +588,7 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         #load to spells
         spell_frame = SpellFrame(self, spell)
         spell_frame.pack(side='bottom', padx=10, pady=10, expand=True, fill='x')
-        self.spells.append(spell_frame)
+        self.spell_frames.append(spell_frame)
 
     def make_spell_window(self):
         if self.spell_window != None:
@@ -584,7 +603,7 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         self.spell_window.geometry(f'{w_width}x{w_height}+{hs_width - hw_width}+{hs_height - hw_height}')
         self.spell_window.resizable(width=True, height=True)
         self.spell_window.minsize(width=w_width, height=w_height)
-        self.spell_window.title('Make a spell')
+        self.spell_window.title('Spell details')
         self.spell_window.bind('<FocusOut>', self.lost_focus)
         self.spell_window.bind('<Destroy>', self.close_window)
 
