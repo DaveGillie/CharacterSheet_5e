@@ -4,6 +4,11 @@ import os
 from save import *
 
 
+TEN = 10
+TWENTY = 20
+THIRTY = 30
+FIFTY = 50
+
 class AttributeFrame(ctk.CTkFrame):
     def __init__(self, parent, name, **kwargs):
         super().__init__(parent, **kwargs)
@@ -25,7 +30,7 @@ class AttributeFrame(ctk.CTkFrame):
         self.var_value = tk.StringVar()
         val_entry = ctk.CTkEntry(frame, justify='center', textvariable=self.var_value)
         val_entry.place(relx=.56, rely=.6, relheight=.4, relwidth=.25, anchor='n')
-        frame.pack(padx=10, pady=10)
+        frame.pack(padx=TEN, pady=TEN)
 
 
 class BonusProfFrame(ctk.CTkFrame):
@@ -38,7 +43,7 @@ class BonusProfFrame(ctk.CTkFrame):
 
         self.var_prof = tk.BooleanVar()
         prof_box = ctk.CTkCheckBox(self, text=name, variable=self.var_prof)
-        prof_box.pack(side='left', padx=10)
+        prof_box.pack(side='left', padx=TEN)
 
 
 class LeftRightFrame(ctk.CTkFrame):
@@ -497,7 +502,7 @@ class SpellSlotsBar(ctk.CTkFrame):
 
 class Spell:
     def __init__(self):
-        self.index = -1
+        self.cached_index = -1
         self.title = tk.StringVar()
         self.description = ''
         self.prepared = tk.BooleanVar()
@@ -507,19 +512,21 @@ class SpellFrame(ctk.CTkFrame):
     def __init__(self, parent, spell, **kwargs):
         super().__init__(parent, **kwargs)
 
-        padx = 20
         delete_button = ctk.CTkButton(self,
                                       text='X',
                                       text_color='black',
                                       fg_color='red',
-                                      width=30)
-        delete_button.pack(side='left', padx=padx)
+                                      width=30,
+                                      command=lambda: parent.delete_spell(spell))
+        delete_button.pack(side='left', padx=TWENTY)
 
-        spell_button = ctk.CTkButton(self, textvariable=spell.title, command=lambda: parent.view_spell_window(spell))
-        spell_button.pack(side='left', expand=True, fill='x', padx=padx)
+        spell_button = ctk.CTkButton(self,
+                                     textvariable=spell.title,
+                                     command=lambda: parent.view_spell_window(spell))
+        spell_button.pack(side='left', expand=True, fill='x', padx=TWENTY)
 
         prepared = ctk.CTkCheckBox(self, text='PREPARED', variable=spell.prepared)
-        prepared.pack(side='left', padx=padx)
+        prepared.pack(side='left', padx=TWENTY)
 
 
 class SpellsFrame(ctk.CTkScrollableFrame):
@@ -528,11 +535,31 @@ class SpellsFrame(ctk.CTkScrollableFrame):
 
         self.spell_window = None
         add_button = ctk.CTkButton(self, text='Add', command=self.new_spell_window)
-        add_button.pack(pady=20)
+        add_button.pack(pady=TWENTY)
 
         data[key_spells] = [] #initialize spells to empty list
         self.data = data
         self.spell_frames = []
+
+    def delete_spell(self, spell):
+        '''
+        1) destroy the ui
+        2) remove the ui from the list of frames
+        3) remove the spell from data
+        4) reset all the spells cached_index
+        '''
+        if messagebox.askyesno(title='WARNING!', message=f'Remove {spell.title.get().upper()} from your spells?'):
+            #use i for the index
+            ci = spell.cached_index
+            #1) destroy the ui
+            self.spell_frames[ci].destroy()
+            #2) remove the ui from the list of frames
+            del self.spell_frames[ci]
+            #3) remove the spell from data
+            del self.data[key_spells][ci]
+            #4) reset all the spells cached_index
+            for i in range(len(self.data[key_spells])):
+                self.data[key_spells][i].cached_index = i
 
     def new_spell_window(self):
         self.make_spell_window()
@@ -546,9 +573,9 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         description_label.pack()
         description = ctk.CTkTextbox(self.spell_window, border_color='#5f6467', border_width=2)
         description.configure(border_color='#5f6467', border_width=2)
-        description.pack(expand=True, fill='both', padx=30)
+        description.pack(expand=True, fill='both', padx=THIRTY)
         apply = ctk.CTkButton(self.spell_window, text='Apply', command=lambda: self.apply_spell(spell, description))
-        apply.pack(pady=30)
+        apply.pack(pady=THIRTY)
 
     def view_spell_window(self, spell):
         self.make_spell_window()
@@ -562,21 +589,21 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         description = ctk.CTkTextbox(self.spell_window, border_color='#5f6467', border_width=2)
         description.insert('0.0', spell.description)
         description.configure(border_color='#5f6467', border_width=2)
-        description.pack(expand=True, fill='both', padx=30)
+        description.pack(expand=True, fill='both', padx=THIRTY)
         apply = ctk.CTkButton(self.spell_window, text='Apply', command=lambda: self.apply_spell(spell, description))
-        apply.pack(pady=30)
+        apply.pack(pady=THIRTY)
 
     def apply_spell(self, spell, description):
         '''This applies changes for new and existing spells'''
         #only append the spell if this is a new spell
         spell.description = description.get('0.0', 'end-1c')
         
-        if spell.index == -1:
+        if spell.cached_index == -1:
             self.data[key_spells].append(spell)
-            spell.index = len(self.data[key_spells]) - 1
+            spell.cached_index = len(self.data[key_spells]) - 1
         
             spell_frame = SpellFrame(self, spell)
-            spell_frame.pack(side='bottom', padx=50, pady=10, expand=True, fill='x')
+            spell_frame.pack(side='bottom', padx=TEN, pady=TEN, expand=True, fill='x')
             self.spell_frames.append(spell_frame)
 
         self.spell_window.destroy()
@@ -584,11 +611,11 @@ class SpellsFrame(ctk.CTkScrollableFrame):
     def load_spell(self, spell):
         #load to data
         self.data[key_spells].append(spell)
-        spell.index = len(self.data[key_spells]) - 1
+        spell.cached_index = len(self.data[key_spells]) - 1
 
         #load to spells
         spell_frame = SpellFrame(self, spell)
-        spell_frame.pack(side='bottom', padx=10, pady=10, expand=True, fill='x')
+        spell_frame.pack(side='bottom', padx=TEN, pady=TEN, expand=True, fill='x')
         self.spell_frames.append(spell_frame)
 
     def make_spell_window(self):
