@@ -502,16 +502,33 @@ class Spell:
         self.description = ''
 
 
+class SpellFrame(ctk.CTkFrame):
+    def __init__(self, parent, spell, **kwargs):
+        super().__init__(parent, **kwargs)
+
+        padx = 20
+
+        delete_button = ctk.CTkButton(self, text='X', text_color='black', fg_color='red', width=30)
+        delete_button.pack(side='left', padx=padx)
+
+        spell_button = ctk.CTkButton(self, text=spell.title.get())
+        spell_button.pack(side='left', expand=True, fill='x', padx=padx)
+
+        prepared = ctk.CTkCheckBox(self, text='prepared')
+        prepared.pack(side='left', padx=padx)
+
+
 class SpellsFrame(ctk.CTkScrollableFrame):
     def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
 
         self.spell_window = None
         add_button = ctk.CTkButton(self, text='Add', command=self.add_spell)
-        add_button.pack(pady=5)
+        add_button.pack(pady=20)
 
         data[key_spells] = [] #initialize spells to empty list
         self.data = data
+        self.spells = []
 
     def add_spell(self):
         '''This opens the spell window for a new spell'''
@@ -532,11 +549,27 @@ class SpellsFrame(ctk.CTkScrollableFrame):
 
     def apply_spell(self, spell, description):
         '''This applies changes for new and existing spells'''
+        #only append the spell if this is a new spell
         if spell.index == -1:
             self.data[key_spells].append(spell)
             spell.index = len(self.data[key_spells]) - 1
+        
         spell.description = description.get('0.0', 'end-1c')
+        spell_frame = SpellFrame(self, spell)
+        spell_frame.pack(side='bottom', padx=50, pady=10, expand=True, fill='x')
+        self.spells.append(spell_frame)
+
         self.spell_window.destroy()
+
+    def load_spell(self, spell):
+        #load to data
+        self.data[key_spells].append(spell)
+        spell.index = len(self.data[key_spells]) - 1
+
+        #load to spells
+        spell_frame = SpellFrame(self, spell)
+        spell_frame.pack(side='bottom', padx=10, pady=10, expand=True, fill='x')
+        self.spells.append(spell_frame)
 
     def make_spell_window(self):
         if self.spell_window != None:
@@ -562,7 +595,6 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         self.spell_window = None
 
 
-
 class SpellInfoFrame(ctk.CTkFrame):
     def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
@@ -573,8 +605,8 @@ class SpellInfoFrame(ctk.CTkFrame):
         self.slots = SpellSlotsBar(self, data=data)
         self.slots.pack(pady=5)
 
-        self.spells = SpellsFrame(self, data=data)
-        self.spells.pack(pady=5, expand=True, fill='both')
+        self.spells_frame = SpellsFrame(self, data=data)
+        self.spells_frame.pack(pady=5, expand=True, fill='both')
 
 
 class SheetTabs(ctk.CTkTabview):
@@ -717,8 +749,8 @@ class SheetTabs(ctk.CTkTabview):
         #The Spells tab
         #################
         self.add('Spells')
-        spells_frame = SpellInfoFrame(self.tab('Spells'), data=data)
-        spells_frame.pack(expand=True, fill='both')
+        spells_info_frame = SpellInfoFrame(self.tab('Spells'), data=data)
+        spells_info_frame.pack(expand=True, fill='both')
 
         #################
         #The File... tab
@@ -852,30 +884,38 @@ class SheetTabs(ctk.CTkTabview):
                     journal_frame.note.insert('0.0', saved_entry[key_note] )
 
             #spell stats
-            spells_frame.stats.prepare.var.set( saved.get(key_spell_stats, d).get(key_prepare, s) )
-            spells_frame.stats.ability.var.set( saved.get(key_spell_stats, d).get(key_ability, s) )
-            spells_frame.stats.dc.var.set( saved.get(key_spell_stats, d).get(key_dc, s) )
-            spells_frame.stats.attack.var.set( saved.get(key_spell_stats, d).get(key_attack, s) )
+            spells_info_frame.stats.prepare.var.set( saved.get(key_spell_stats, d).get(key_prepare, s) )
+            spells_info_frame.stats.ability.var.set( saved.get(key_spell_stats, d).get(key_ability, s) )
+            spells_info_frame.stats.dc.var.set( saved.get(key_spell_stats, d).get(key_dc, s) )
+            spells_info_frame.stats.attack.var.set( saved.get(key_spell_stats, d).get(key_attack, s) )
 
             #spell slots
-            spells_frame.slots.lvl1_max.var.set( saved.get(key_spell_slots, d).get(key_lvl1_max, s) )
-            spells_frame.slots.lvl1_used.var.set( saved.get(key_spell_slots, d).get(key_lvl1_used, s) )
-            spells_frame.slots.lvl2_max.var.set( saved.get(key_spell_slots, d).get(key_lvl2_max, s) )
-            spells_frame.slots.lvl2_used.var.set( saved.get(key_spell_slots, d).get(key_lvl2_used, s) )
-            spells_frame.slots.lvl3_max.var.set( saved.get(key_spell_slots, d).get(key_lvl3_max, s) )
-            spells_frame.slots.lvl3_used.var.set( saved.get(key_spell_slots, d).get(key_lvl3_used, s) )
-            spells_frame.slots.lvl4_max.var.set( saved.get(key_spell_slots, d).get(key_lvl4_max, s) )
-            spells_frame.slots.lvl4_used.var.set( saved.get(key_spell_slots, d).get(key_lvl4_used, s) )
-            spells_frame.slots.lvl5_max.var.set( saved.get(key_spell_slots, d).get(key_lvl5_max, s) )
-            spells_frame.slots.lvl5_used.var.set( saved.get(key_spell_slots, d).get(key_lvl5_used, s) )
-            spells_frame.slots.lvl6_max.var.set( saved.get(key_spell_slots, d).get(key_lvl6_max, s) )
-            spells_frame.slots.lvl6_used.var.set( saved.get(key_spell_slots, d).get(key_lvl6_used, s) )
-            spells_frame.slots.lvl7_max.var.set( saved.get(key_spell_slots, d).get(key_lvl7_max, s) )
-            spells_frame.slots.lvl7_used.var.set( saved.get(key_spell_slots, d).get(key_lvl7_used, s) )
-            spells_frame.slots.lvl8_max.var.set( saved.get(key_spell_slots, d).get(key_lvl8_max, s) )
-            spells_frame.slots.lvl8_used.var.set( saved.get(key_spell_slots, d).get(key_lvl8_used, s) )
-            spells_frame.slots.lvl9_max.var.set( saved.get(key_spell_slots, d).get(key_lvl9_max, s) )
-            spells_frame.slots.lvl9_used.var.set( saved.get(key_spell_slots, d).get(key_lvl9_used, s) )
+            spells_info_frame.slots.lvl1_max.var.set( saved.get(key_spell_slots, d).get(key_lvl1_max, s) )
+            spells_info_frame.slots.lvl1_used.var.set( saved.get(key_spell_slots, d).get(key_lvl1_used, s) )
+            spells_info_frame.slots.lvl2_max.var.set( saved.get(key_spell_slots, d).get(key_lvl2_max, s) )
+            spells_info_frame.slots.lvl2_used.var.set( saved.get(key_spell_slots, d).get(key_lvl2_used, s) )
+            spells_info_frame.slots.lvl3_max.var.set( saved.get(key_spell_slots, d).get(key_lvl3_max, s) )
+            spells_info_frame.slots.lvl3_used.var.set( saved.get(key_spell_slots, d).get(key_lvl3_used, s) )
+            spells_info_frame.slots.lvl4_max.var.set( saved.get(key_spell_slots, d).get(key_lvl4_max, s) )
+            spells_info_frame.slots.lvl4_used.var.set( saved.get(key_spell_slots, d).get(key_lvl4_used, s) )
+            spells_info_frame.slots.lvl5_max.var.set( saved.get(key_spell_slots, d).get(key_lvl5_max, s) )
+            spells_info_frame.slots.lvl5_used.var.set( saved.get(key_spell_slots, d).get(key_lvl5_used, s) )
+            spells_info_frame.slots.lvl6_max.var.set( saved.get(key_spell_slots, d).get(key_lvl6_max, s) )
+            spells_info_frame.slots.lvl6_used.var.set( saved.get(key_spell_slots, d).get(key_lvl6_used, s) )
+            spells_info_frame.slots.lvl7_max.var.set( saved.get(key_spell_slots, d).get(key_lvl7_max, s) )
+            spells_info_frame.slots.lvl7_used.var.set( saved.get(key_spell_slots, d).get(key_lvl7_used, s) )
+            spells_info_frame.slots.lvl8_max.var.set( saved.get(key_spell_slots, d).get(key_lvl8_max, s) )
+            spells_info_frame.slots.lvl8_used.var.set( saved.get(key_spell_slots, d).get(key_lvl8_used, s) )
+            spells_info_frame.slots.lvl9_max.var.set( saved.get(key_spell_slots, d).get(key_lvl9_max, s) )
+            spells_info_frame.slots.lvl9_used.var.set( saved.get(key_spell_slots, d).get(key_lvl9_used, s) )
+
+            #spells
+            if saved.get(key_spells) != None:
+                for saved_spell in saved.get(key_spells):
+                    spell = Spell()
+                    spell.title.set( saved_spell.get(key_title, s)) 
+                    spell.description = saved_spell.get(key_description, s)
+                    spells_info_frame.spells_frame.load_spell(spell)
 
 
 class App(ctk.CTk):
