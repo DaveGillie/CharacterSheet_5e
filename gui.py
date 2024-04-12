@@ -530,8 +530,12 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         super().__init__(parent, **kwargs)
 
         self.spell_window = None
-        add_button = ctk.CTkButton(self, text='Add', command=self.new_spell_window)
-        add_button.pack(pady=TWENTY)
+        buttons_frame = ctk.CTkFrame(self)
+        add_button = ctk.CTkButton(buttons_frame, text='Add', command=self.new_spell_window)
+        add_button.pack(side='left', padx=TEN)
+        order_button = ctk.CTkButton(buttons_frame, text='Order', command=self.order_spells)
+        order_button.pack(side='left', padx=TEN)
+        buttons_frame.pack(pady=TWENTY)
 
         data[key_spells] = [] #initialize spells to empty list
         self.data = data
@@ -556,6 +560,10 @@ class SpellsFrame(ctk.CTkScrollableFrame):
             #4) reset all the spells cached_index
             for i in range(len(self.data[key_spells])):
                 self.data[key_spells][i].cached_index = i
+
+    def order_spells(self):
+        self.data[key_spells].sort(key=lambda spell: spell.title.get())
+        self.recreate_gui_with_data()
 
     def new_spell_window(self):
         self.make_spell_window()
@@ -626,7 +634,9 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         else:
             raise Exception('The only acceptable valutes for "to" are "top" and "bot"')
         
-        #destroy and recreate the gui
+        self.recreate_gui_with_data()
+
+    def recreate_gui_with_data(self):
         for i in range(len(self.data[key_spells])):
             self.data[key_spells][i].cached_index = i
             new_frame = SpellFrame(self, self.data[key_spells][i])
