@@ -8,6 +8,7 @@ TEN = 10
 TWENTY = 20
 THIRTY = 30
 FIFTY = 50
+WARNING = 'WARNING!'
 
 class AttributeFrame(ctk.CTkFrame):
     def __init__(self, parent, name, **kwargs):
@@ -310,7 +311,7 @@ class ItemFrame(ctk.CTkFrame):
         2) update all the other cached_index
         3) remove this item from the gui
         '''
-        if messagebox.askyesno(title='WARNING!', message=f'Remove {self.var_name.get().upper()} from your inventory?'):
+        if messagebox.askyesno(title=WARNING, message=f'Remove {self.var_name.get().upper()} from your inventory?'):
             #1) remove this item from the list
             del self.data[key_items][self.cached_index]
             #2) update all the other cached_index
@@ -371,7 +372,7 @@ class JournalFrame(ctk.CTkFrame):
         2) update all the other cached_index
         3) remove this journal entry from the gui
         '''
-        if messagebox.askyesno(title='WARNING!', message=f'Remove {self.var_title.get().upper()} from your journal?'):
+        if messagebox.askyesno(title=WARNING, message=f'Remove {self.var_title.get().upper()} from your journal?'):
             #1) remove this journal entry from the list
             del self.data[key_journal][self.cached_index]
             #2) update all the other cached_index
@@ -550,7 +551,7 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         3) remove the spell from data
         4) reset all the spells cached_index
         '''
-        if messagebox.askyesno(title='WARNING!', message=f'Remove {spell.title.get().upper()} from your spells?'):
+        if messagebox.askyesno(title=WARNING, message=f'Remove {spell.title.get().upper()} from your spells?'):
             #use i for the index
             ci = spell.cached_index
             #1) destroy the ui
@@ -1016,4 +1017,10 @@ if __name__ == '__main__':
     app.geometry(f'{a_width}x{a_height}+{hs_width - ha_width}+{hs_height - ha_height}')
     app.minsize(width=800, height=600)
     app.title('Character Sheet')
+
+    def on_closing():
+        if messagebox.askyesno(WARNING, "Do you want to quit?\nUNSAVED CHANGES WILL BE LOST"):
+            app.destroy()
+    app.protocol("WM_DELETE_WINDOW", on_closing)
+
     app.mainloop()
