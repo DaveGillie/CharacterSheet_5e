@@ -517,6 +517,13 @@ class SpellFrame(ctk.CTkFrame):
         prepared = ctk.CTkCheckBox(self, text='PREPARED', variable=spell.prepared)
         prepared.pack(side='left', padx=TWENTY)
 
+        updown_frame = ctk.CTkFrame(self)
+        up = ctk.CTkButton(updown_frame, text='Top', width=FIFTY, command=lambda: parent.move_spell(spell, 'top'))
+        up.pack(pady=5)
+        down = ctk.CTkButton(updown_frame, text='Bot', width=FIFTY, command=lambda: parent.move_spell(spell, 'bot'))
+        down.pack(pady=5)
+        updown_frame.pack(side='left')
+
 
 class SpellsFrame(ctk.CTkScrollableFrame):
     def __init__(self, parent, data, **kwargs):
@@ -606,6 +613,26 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         spell_frame = SpellFrame(self, spell)
         spell_frame.pack(side='bottom', padx=TEN, pady=TEN, expand=True, fill='x')
         self.spell_frames.append(spell_frame)
+
+    def move_spell(self, spell, to):
+        #remove this spell from its spot in data
+        del self.data[key_spells][spell.cached_index]
+        
+        #move it to its new location in data
+        if to == 'top':
+            self.data[key_spells].append(spell)
+        elif to == 'bot':
+            self.data[key_spells].insert(0, spell)
+        else:
+            raise Exception('The only acceptable valutes for "to" are "top" and "bot"')
+        
+        #destroy and recreate the gui
+        for i in range(len(self.data[key_spells])):
+            self.data[key_spells][i].cached_index = i
+            new_frame = SpellFrame(self, self.data[key_spells][i])
+            new_frame.pack(side='bottom', padx=TEN, pady=TEN, expand=True, fill='x')
+            self.spell_frames[i].destroy()
+            self.spell_frames[i] = new_frame
 
     def make_spell_window(self):
         if self.spell_window != None:
