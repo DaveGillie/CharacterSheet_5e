@@ -279,26 +279,6 @@
     },
     "spells": [
         {
-            "title": "0 Fire Bolt",
-            "description": "Evocation cantrip\n\nCasting Time: 1 action\nRange: 120 feet\nComponents: V, S\nDuration: Instantaneous\n\nYou hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn\u2019t being worn or carried.\n\nAt Higher Levels. This spell\u2019s damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).",
-            "prepared": true
-        },
-        {
-            "title": "0 Mage Hand",
-            "description": "Conjuration cantrip\n\nCasting Time: 1 action\nRange: 30 feet\nComponents: V, S\nDuration: 1 minute\n\nA spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.\n\nYou can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.\n\nThe hand can\u2019t attack, activate magical items, or carry more than 10 pounds.",
-            "prepared": true
-        },
-        {
-            "title": "0 Prestidigitation",
-            "description": "Transmutation cantrip\n\nCasting Time: 1 action\nRange: 10 feet\nComponents: V, S\nDuration: Up to 1 hour\n\nThis spell is a minor magical trick that novice spellcasters use for practice. You create one of the following magical effects within range:\n\nYou create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.\nYou instantaneously light or snuff out a candle, a torch, or a small campfire.\nYou instantaneously clean or soil an object no larger than 1 cubic foot.\nYou chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.\nYou make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.\nYou create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.\nIf you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",
-            "prepared": true
-        },
-        {
-            "title": "0 Ray of Frost",
-            "description": "Evocation cantrip\n\nCasting Time: 1 action\nRange: 60 feet\nComponents: V, S\nDuration: Instantaneous\n\nA frigid beam of blue-white light streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 1d8 cold damage, and its speed is reduced by 10 feet until the start of your next turn.\n\nAt Higher Levels. The spell\u2019s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
-            "prepared": true
-        },
-        {
             "title": "1 Alarm [R]",
             "description": "1st-level abjuration (ritual)\n\nCasting Time: 1 minute\nRange: 30 feet\nComponents: V, S, M (a tiny bell and a piece of fine silver wire)\nDuration: 8 hours\n\nYou set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won\u2019t set off the alarm. You also choose whether the alarm is mental or audible.\n\nA mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping. An audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.",
             "prepared": false
@@ -354,26 +334,6 @@
             "prepared": false
         },
         {
-            "title": "1 Mage Armor",
-            "description": "1st-level abjuration\n\nCasting Time: 1 action\nRange: Touch\nComponents: V, S, M (a piece of cured leather)\nDuration: 8 hours\n\nYou touch a willing creature who isn\u2019t wearing armor, and a protective magical force surrounds it until the spell ends. The target\u2019s base AC becomes 13 + its Dexterity modifier. The spell ends if the target dons armor or if you dismiss the spell as an action.",
-            "prepared": false
-        },
-        {
-            "title": "1 Magic Missile",
-            "description": "1st-level evocation\n\nCasting Time: 1 action\nRange: 120 feet\nComponents: V, S\nDuration: Instantaneous\n\nYou create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously and you can direct them to hit one creature or several.\n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.",
-            "prepared": false
-        },
-        {
-            "title": "1 Shield",
-            "description": "1st-level abjuration\n\nCasting Time: 1 reaction, which you take when you are hit by an attack or targeted by the magic missile spell\nRange: Self\nComponents: V, S\nDuration: 1 round\n\nAn invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.",
-            "prepared": false
-        },
-        {
-            "title": "1 Silent Image",
-            "description": "1st-level illusion\n\nCasting Time: 1 action\nRange: 60 feet\nComponents: V, S, M (a bit of fleece)\nDuration: Concentration, up to 10 minutes\n\nYou create the image of an object, a creature, or some other visible phenomenon that is no larger than a 15-foot cube. The image appears at a spot within range and lasts for the duration. The image is purely visual; it isn\u2019t accompanied by sound, smell, or other sensory effects.\n\nYou can use your action to cause the image to move to any spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking.\n\nPhysical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image.",
-            "prepared": false
-        },
-        {
             "title": "1 Silvery Barbs",
             "description": "1st-level Enchantment\n\nCasting Time: 1 reaction, which you take when a creature you can see within 60 feet of yourself succeeds on an attack roll, an ability check, or a saving throw\nRange: 60 feet\nComponents: V\nDuration: Instantaneous\n\nYou magically distract the triggering creature and turn its momentary uncertainty into encouragement for another creature. The triggering creature must reroll the d20 and use the lower roll.\n\nYou can then choose a different creature you can see within range (you can choose yourself). The chosen creature has advantage on the next attack roll, ability check, or saving throw it makes within 1 minute. A creature can be empowered by only one use of this spell at a time.",
             "prepared": false
@@ -394,11 +354,6 @@
             "prepared": false
         },
         {
-            "title": "2 Dragon's Breath",
-            "description": "2nd-level transmutation\n\nCasting Time: 1 bonus action\nRange: Touch\nComponents: V, S, M (a hot pepper)\nDuration: Concentration, up to 1 minute\n\nYou touch one willing creature and imbue it with the power to spew magical energy from its mouth, provided it has one. Choose acid, cold, fire, lightning, or poison. Until the spell ends, the creature can use an action to exhale energy of the chosen type in a 15-foot cone. Each creature in that area must make a Dexterity saving throw, taking 3d6 damage of the chosen type on a failed save, or half as much damage on a successful one.\n\nAt Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.",
-            "prepared": false
-        },
-        {
             "title": "2 Enlarge Reduce",
             "description": "2nd-level transmutation\n\nCasting Time: 1 action\nRange: 30 feet\nComponents: V, S, M (a pinch of powdered iron)\nDuration: Concentration, up to 1 minute\n\nYou cause a creature or an object you can see within range to grow larger or smaller for the duration. Choose either a creature or an object that is neither worn nor carried. If the target is unwilling, it can make a Constitution saving throw. On a success, the spell has no effect.\n\nIf the target is a creature, everything it is wearing and carrying changes size with it. Any item dropped by an affected creature returns to normal size at once.\n\nEnlarge. The target\u2019s size doubles in all dimensions, and its weight is multiplied by eight. This growth increases its size by one category \u2013 from Medium to Large, for example. If there isn\u2019t enough room for the target to double its size, the creature or object attains the maximum possible size in the space available. Until the spell ends, the target also has advantage on Strength checks and Strength saving throws. The target\u2019s weapons also grow to match its new size. While these weapons are enlarged, the target\u2019s attack with them deal 1d4 extra damage.\n\nReduce. The target\u2019s size is halved in all dimensions, and its weight is reduced to one-eighth of normal. This reduction decreases its size by one category \u2013 from Medium to Small, for example. Until the spell ends, the target also has disadvantage on Strength checks and Strength saving throws. The target\u2019s weapons also shrink to match its new size. While these weapons are reduced, the target\u2019s attacks with them deal 1d4 less damage (this can\u2019t reduce the damage below 1).",
             "prepared": false
@@ -414,24 +369,69 @@
             "prepared": false
         },
         {
-            "title": "2 Rope Trick",
-            "description": "2nd-level transmutation\n\nCasting Time: 1 action\nRange: Touch\nComponents: V, S, M (powdered corn extract and a twisted loop of parchment)\nDuration: 1 hour\n\nYou touch a length of rope that is up to 60 feet long. One end of the rope then rises into the air until the whole rope hangs perpendicular to the ground. At the upper end of the rope, an invisible entrance opens to an extradimensional space that lasts until the spell ends.\n\nThe extradimensional space can be reached by climbing to the top of the rope. The space can hold as many as eight Medium or smaller creatures. The rope can be pulled into the space, making the rope disappear from view outside the space.\n\nAttacks and spells can\u2019t cross through the entrance into or out of the extradimensional space, but those inside can see out of it as if through a 3-foot-by-5-foot window centered on the rope.\n\nAnything inside the extradimensional space drops out when the spell ends.",
-            "prepared": false
-        },
-        {
             "title": "2 Scorching Ray",
             "description": "2nd-level evocation\n\nCasting Time: 1 action\nRange: 120 feet\nComponents: V, S\nDuration: Instantaneous\n\nYou create three rays of fire and hurl them at targets within range. You can hurl them at one target or several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 fire damage.\n\nAt Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, you create one additional ray for each slot level above 2nd.",
             "prepared": false
         },
         {
+            "title": "0 Fire Bolt",
+            "description": "Evocation cantrip\n\nCasting Time: 1 action\nRange: 120 feet\nComponents: V, S\nDuration: Instantaneous\n\nYou hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn\u2019t being worn or carried.\n\nAt Higher Levels. This spell\u2019s damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).",
+            "prepared": true
+        },
+        {
+            "title": "0 Mage Hand",
+            "description": "Conjuration cantrip\n\nCasting Time: 1 action\nRange: 30 feet\nComponents: V, S\nDuration: 1 minute\n\nA spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.\n\nYou can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.\n\nThe hand can\u2019t attack, activate magical items, or carry more than 10 pounds.",
+            "prepared": true
+        },
+        {
+            "title": "0 Prestidigitation",
+            "description": "Transmutation cantrip\n\nCasting Time: 1 action\nRange: 10 feet\nComponents: V, S\nDuration: Up to 1 hour\n\nThis spell is a minor magical trick that novice spellcasters use for practice. You create one of the following magical effects within range:\n\nYou create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.\nYou instantaneously light or snuff out a candle, a torch, or a small campfire.\nYou instantaneously clean or soil an object no larger than 1 cubic foot.\nYou chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.\nYou make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.\nYou create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.\nIf you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",
+            "prepared": true
+        },
+        {
+            "title": "0 Ray of Frost",
+            "description": "Evocation cantrip\n\nCasting Time: 1 action\nRange: 60 feet\nComponents: V, S\nDuration: Instantaneous\n\nA frigid beam of blue-white light streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 1d8 cold damage, and its speed is reduced by 10 feet until the start of your next turn.\n\nAt Higher Levels. The spell\u2019s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
+            "prepared": true
+        },
+        {
+            "title": "1 Mage Armor",
+            "description": "1st-level abjuration\n\nCasting Time: 1 action\nRange: Touch\nComponents: V, S, M (a piece of cured leather)\nDuration: 8 hours\n\nYou touch a willing creature who isn\u2019t wearing armor, and a protective magical force surrounds it until the spell ends. The target\u2019s base AC becomes 13 + its Dexterity modifier. The spell ends if the target dons armor or if you dismiss the spell as an action.",
+            "prepared": true
+        },
+        {
+            "title": "1 Magic Missile",
+            "description": "1st-level evocation\n\nCasting Time: 1 action\nRange: 120 feet\nComponents: V, S\nDuration: Instantaneous\n\nYou create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously and you can direct them to hit one creature or several.\n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.",
+            "prepared": true
+        },
+        {
+            "title": "1 Shield",
+            "description": "1st-level abjuration\n\nCasting Time: 1 reaction, which you take when you are hit by an attack or targeted by the magic missile spell\nRange: Self\nComponents: V, S\nDuration: 1 round\n\nAn invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.",
+            "prepared": true
+        },
+        {
+            "title": "1 Silent Image",
+            "description": "1st-level illusion\n\nCasting Time: 1 action\nRange: 60 feet\nComponents: V, S, M (a bit of fleece)\nDuration: Concentration, up to 10 minutes\n\nYou create the image of an object, a creature, or some other visible phenomenon that is no larger than a 15-foot cube. The image appears at a spot within range and lasts for the duration. The image is purely visual; it isn\u2019t accompanied by sound, smell, or other sensory effects.\n\nYou can use your action to cause the image to move to any spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking.\n\nPhysical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image.",
+            "prepared": true
+        },
+        {
+            "title": "2 Dragon's Breath",
+            "description": "2nd-level transmutation\n\nCasting Time: 1 bonus action\nRange: Touch\nComponents: V, S, M (a hot pepper)\nDuration: Concentration, up to 1 minute\n\nYou touch one willing creature and imbue it with the power to spew magical energy from its mouth, provided it has one. Choose acid, cold, fire, lightning, or poison. Until the spell ends, the creature can use an action to exhale energy of the chosen type in a 15-foot cone. Each creature in that area must make a Dexterity saving throw, taking 3d6 damage of the chosen type on a failed save, or half as much damage on a successful one.\n\nAt Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.",
+            "prepared": true
+        },
+        {
+            "title": "2 Rope Trick",
+            "description": "2nd-level transmutation\n\nCasting Time: 1 action\nRange: Touch\nComponents: V, S, M (powdered corn extract and a twisted loop of parchment)\nDuration: 1 hour\n\nYou touch a length of rope that is up to 60 feet long. One end of the rope then rises into the air until the whole rope hangs perpendicular to the ground. At the upper end of the rope, an invisible entrance opens to an extradimensional space that lasts until the spell ends.\n\nThe extradimensional space can be reached by climbing to the top of the rope. The space can hold as many as eight Medium or smaller creatures. The rope can be pulled into the space, making the rope disappear from view outside the space.\n\nAttacks and spells can\u2019t cross through the entrance into or out of the extradimensional space, but those inside can see out of it as if through a 3-foot-by-5-foot window centered on the rope.\n\nAnything inside the extradimensional space drops out when the spell ends.",
+            "prepared": true
+        },
+        {
             "title": "2 Shatter",
             "description": "2nd-level evocation\n\nCasting Time: 1 action\nRange: 60 feet\nComponents: V, S, M (a chip of mica)\nDuration: Instantaneous\n\nA sudden loud ringing noise, painfully intense, erupts from a point of your choice within range. Each creature in a 10-foot-radius sphere centered on that point must make a Constitution saving throw. A creature takes 3d8 thunder damage on a failed save, or half as much damage on a successful one. A creature made of inorganic material such as stone, crystal, or metal has disadvantage on this saving throw.\n\nA nonmagical object that isn\u2019t being worn or carried also takes the damage if it\u2019s in the spell\u2019s area.\n\nAt Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.",
-            "prepared": false
+            "prepared": true
         },
         {
             "title": "2 Vortex Warp",
             "description": "2nd-level Conjuration\n\nCasting Time: 1 action\nRange: 90 feet\nComponents: V, S\nDuration: Instantaneous\n\nYou magically twist space around another creature you can see within range. The target must succeed on a Constitution saving throw (the target can choose to fail), or the target is teleported to an unoccupied space of your choice that you can see within range. The chosen space must be on a surface or in a liquid that can support the target without the target having to squeeze.\n\nAt Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the range of the spell increases by 30 feet for each slot level above 2nd.",
-            "prepared": false
+            "prepared": true
         }
     ]
 }
