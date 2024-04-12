@@ -533,8 +533,10 @@ class SpellsFrame(ctk.CTkScrollableFrame):
         buttons_frame = ctk.CTkFrame(self)
         add_button = ctk.CTkButton(buttons_frame, text='Add', command=self.new_spell_window)
         add_button.pack(side='left', padx=TEN)
-        order_button = ctk.CTkButton(buttons_frame, text='Order', command=self.order_spells)
-        order_button.pack(side='left', padx=TEN)
+        order_by_title = ctk.CTkButton(buttons_frame, text='Order (title)', command=self.order_spells_by_title)
+        order_by_title.pack(side='left', padx=TEN)
+        order_by_prepared = ctk.CTkButton(buttons_frame, text='Order (prepared)', command=self.order_spells_by_prepared)
+        order_by_prepared.pack(side='left', padx=TEN)
         buttons_frame.pack(pady=TWENTY)
 
         data[key_spells] = [] #initialize spells to empty list
@@ -561,8 +563,12 @@ class SpellsFrame(ctk.CTkScrollableFrame):
             for i in range(len(self.data[key_spells])):
                 self.data[key_spells][i].cached_index = i
 
-    def order_spells(self):
+    def order_spells_by_title(self):
         self.data[key_spells].sort(key=lambda spell: spell.title.get())
+        self.recreate_gui_with_data()
+
+    def order_spells_by_prepared(self):
+        self.data[key_spells].sort(key=lambda spell: spell.prepared.get())
         self.recreate_gui_with_data()
 
     def new_spell_window(self):
@@ -686,7 +692,7 @@ class SheetTabs(ctk.CTkTabview):
     '''THIS IS WHERE THE MAGIC HAPPENS'''
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
-        self.configure(width=600, height=800)
+        self.configure(width=600, height=1000)
 
         data = {}
 
