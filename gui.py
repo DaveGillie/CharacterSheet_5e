@@ -417,86 +417,75 @@ class SpellStatsBar(ctk.CTkFrame):
 
 
 class SpellSlotFrame(ctk.CTkFrame):
-    def __init__(self, parent, top_label, bot_label, **kwargs):
+    def __init__(self, parent, level, **kwargs):
         super().__init__(parent, **kwargs)
 
-        tl = ctk.CTkLabel(self, text=top_label, font=(None, 15))
-        tl.pack()
-        self.var = tk.StringVar()
-        entry = ctk.CTkEntry(self, justify='center', width=30, font=(None, 20), textvariable=self.var)
-        entry.pack()
-        bl = ctk.CTkLabel(self, text=bot_label, font=(None, 10))
-        bl.pack()
+        label = ctk.CTkLabel(self, text=level, font=(None, 15))
+        label.pack()
+        self.var_max = tk.StringVar()
+        max_entry = ctk.CTkEntry(self, justify='center', width=30, font=(None, 20), textvariable=self.var_max)
+        max_entry.pack()
+        self.var_used = tk.StringVar()
+        used_entry = ctk.CTkEntry(self, justify='center', width=30, font=(None, 20), textvariable=self.var_used)
+        used_entry.pack()
 
 
 class SpellSlotsBar(ctk.CTkFrame):
     def __init__(self, parent, data, **kwargs):
         super().__init__(parent, **kwargs)
 
-        self.lvl1_max = SpellSlotFrame(self, top_label='1', bot_label='MAX')
-        self.lvl1_max.pack(side='left', padx=2)
-        self.lvl1_used = SpellSlotFrame(self, top_label='1', bot_label='USED')
-        self.lvl1_used.pack(side='left', padx=2)
+        labels_frame = ctk.CTkFrame(self)
+        ctk.CTkLabel(labels_frame, text='LVL').pack()
+        ctk.CTkLabel(labels_frame, text='MAX').pack()
+        ctk.CTkLabel(labels_frame, text='USED').pack()
+        labels_frame.pack(side='left', padx=2)
 
-        self.lvl2_max = SpellSlotFrame(self, top_label='2', bot_label='MAX')
-        self.lvl2_max.pack(side='left', padx=2)
-        self.lvl2_used = SpellSlotFrame(self, top_label='2', bot_label='USED')
-        self.lvl2_used.pack(side='left', padx=2)
+        self.lvl1 = SpellSlotFrame(self, level='1')
+        self.lvl1.pack(side='left', padx=2)
 
-        self.lvl3_max = SpellSlotFrame(self, top_label='3', bot_label='MAX')
-        self.lvl3_max.pack(side='left', padx=2)
-        self.lvl3_used = SpellSlotFrame(self, top_label='3', bot_label='USED')
-        self.lvl3_used.pack(side='left', padx=2)
+        self.lvl2 = SpellSlotFrame(self, level='2')
+        self.lvl2.pack(side='left', padx=2)
 
-        self.lvl4_max = SpellSlotFrame(self, top_label='4', bot_label='MAX')
-        self.lvl4_max.pack(side='left', padx=2)
-        self.lvl4_used = SpellSlotFrame(self, top_label='4', bot_label='USED')
-        self.lvl4_used.pack(side='left', padx=2)
+        self.lvl3 = SpellSlotFrame(self, level='3')
+        self.lvl3.pack(side='left', padx=2)
 
-        self.lvl5_max = SpellSlotFrame(self, top_label='5', bot_label='MAX')
-        self.lvl5_max.pack(side='left', padx=2)
-        self.lvl5_used = SpellSlotFrame(self, top_label='5', bot_label='USED')
-        self.lvl5_used.pack(side='left', padx=2)
+        self.lvl4 = SpellSlotFrame(self, level='4')
+        self.lvl4.pack(side='left', padx=2)
 
-        self.lvl6_max = SpellSlotFrame(self, top_label='6', bot_label='MAX')
-        self.lvl6_max.pack(side='left', padx=2)
-        self.lvl6_used = SpellSlotFrame(self, top_label='6', bot_label='USED')
-        self.lvl6_used.pack(side='left', padx=2)
+        self.lvl5 = SpellSlotFrame(self, level='5')
+        self.lvl5.pack(side='left', padx=2)
 
-        self.lvl7_max = SpellSlotFrame(self, top_label='7', bot_label='MAX')
-        self.lvl7_max.pack(side='left', padx=2)
-        self.lvl7_used = SpellSlotFrame(self, top_label='7', bot_label='USED')
-        self.lvl7_used.pack(side='left', padx=2)
+        self.lvl6 = SpellSlotFrame(self, level='6')
+        self.lvl6.pack(side='left', padx=2)
 
-        self.lvl8_max = SpellSlotFrame(self, top_label='8', bot_label='MAX')
-        self.lvl8_max.pack(side='left', padx=2)
-        self.lvl8_used = SpellSlotFrame(self, top_label='8', bot_label='USED')
-        self.lvl8_used.pack(side='left', padx=2)
+        self.lvl7 = SpellSlotFrame(self, level='7')
+        self.lvl7.pack(side='left', padx=2)
 
-        self.lvl9_max = SpellSlotFrame(self, top_label='9', bot_label='MAX')
-        self.lvl9_max.pack(side='left', padx=2)
-        self.lvl9_used = SpellSlotFrame(self, top_label='9', bot_label='USED')
-        self.lvl9_used.pack(side='left', padx=2)
+        self.lvl8 = SpellSlotFrame(self, level='8')
+        self.lvl8.pack(side='left', padx=2)
+
+        self.lvl9 = SpellSlotFrame(self, level='9')
+        self.lvl9.pack(side='left', padx=2)
 
         data[key_spell_slots] = {
-            key_lvl1_max: self.lvl1_max.var,
-            key_lvl1_used: self.lvl1_used.var,
-            key_lvl2_max: self.lvl2_max.var,
-            key_lvl2_used: self.lvl2_used.var,
-            key_lvl3_max: self.lvl3_max.var,
-            key_lvl3_used: self.lvl3_used.var,
-            key_lvl4_max: self.lvl4_max.var,
-            key_lvl4_used: self.lvl4_used.var,
-            key_lvl5_max: self.lvl5_max.var,
-            key_lvl5_used: self.lvl5_used.var,
-            key_lvl6_max: self.lvl6_max.var,
-            key_lvl6_used: self.lvl6_used.var,
-            key_lvl7_max: self.lvl7_max.var,
-            key_lvl7_used: self.lvl7_used.var,
-            key_lvl8_max: self.lvl8_max.var,
-            key_lvl8_used: self.lvl8_used.var,
-            key_lvl9_max: self.lvl9_max.var,
-            key_lvl9_used: self.lvl9_used.var
+            key_lvl1_max: self.lvl1.var_max,
+            key_lvl2_max: self.lvl2.var_max,
+            key_lvl3_max: self.lvl3.var_max,
+            key_lvl4_max: self.lvl4.var_max,
+            key_lvl5_max: self.lvl5.var_max,
+            key_lvl6_max: self.lvl6.var_max,
+            key_lvl7_max: self.lvl7.var_max,
+            key_lvl8_max: self.lvl8.var_max,
+            key_lvl9_max: self.lvl9.var_max,
+            key_lvl1_used: self.lvl1.var_used,
+            key_lvl2_used: self.lvl2.var_used,
+            key_lvl3_used: self.lvl3.var_used,
+            key_lvl4_used: self.lvl4.var_used,
+            key_lvl5_used: self.lvl5.var_used,
+            key_lvl6_used: self.lvl6.var_used,
+            key_lvl7_used: self.lvl7.var_used,
+            key_lvl8_used: self.lvl8.var_used,
+            key_lvl9_used: self.lvl9.var_used,
         }
 
 
@@ -937,24 +926,24 @@ class SheetTabs(ctk.CTkTabview):
             spells_info_frame.stats.attack.var.set( saved.get(key_spell_stats, d).get(key_attack, s) )
 
             #spell slots
-            spells_info_frame.slots.lvl1_max.var.set( saved.get(key_spell_slots, d).get(key_lvl1_max, s) )
-            spells_info_frame.slots.lvl1_used.var.set( saved.get(key_spell_slots, d).get(key_lvl1_used, s) )
-            spells_info_frame.slots.lvl2_max.var.set( saved.get(key_spell_slots, d).get(key_lvl2_max, s) )
-            spells_info_frame.slots.lvl2_used.var.set( saved.get(key_spell_slots, d).get(key_lvl2_used, s) )
-            spells_info_frame.slots.lvl3_max.var.set( saved.get(key_spell_slots, d).get(key_lvl3_max, s) )
-            spells_info_frame.slots.lvl3_used.var.set( saved.get(key_spell_slots, d).get(key_lvl3_used, s) )
-            spells_info_frame.slots.lvl4_max.var.set( saved.get(key_spell_slots, d).get(key_lvl4_max, s) )
-            spells_info_frame.slots.lvl4_used.var.set( saved.get(key_spell_slots, d).get(key_lvl4_used, s) )
-            spells_info_frame.slots.lvl5_max.var.set( saved.get(key_spell_slots, d).get(key_lvl5_max, s) )
-            spells_info_frame.slots.lvl5_used.var.set( saved.get(key_spell_slots, d).get(key_lvl5_used, s) )
-            spells_info_frame.slots.lvl6_max.var.set( saved.get(key_spell_slots, d).get(key_lvl6_max, s) )
-            spells_info_frame.slots.lvl6_used.var.set( saved.get(key_spell_slots, d).get(key_lvl6_used, s) )
-            spells_info_frame.slots.lvl7_max.var.set( saved.get(key_spell_slots, d).get(key_lvl7_max, s) )
-            spells_info_frame.slots.lvl7_used.var.set( saved.get(key_spell_slots, d).get(key_lvl7_used, s) )
-            spells_info_frame.slots.lvl8_max.var.set( saved.get(key_spell_slots, d).get(key_lvl8_max, s) )
-            spells_info_frame.slots.lvl8_used.var.set( saved.get(key_spell_slots, d).get(key_lvl8_used, s) )
-            spells_info_frame.slots.lvl9_max.var.set( saved.get(key_spell_slots, d).get(key_lvl9_max, s) )
-            spells_info_frame.slots.lvl9_used.var.set( saved.get(key_spell_slots, d).get(key_lvl9_used, s) )
+            spells_info_frame.slots.lvl1.var_max.set( saved.get(key_spell_slots, d).get(key_lvl1_max, s) )
+            spells_info_frame.slots.lvl2.var_max.set( saved.get(key_spell_slots, d).get(key_lvl2_max, s) )
+            spells_info_frame.slots.lvl3.var_max.set( saved.get(key_spell_slots, d).get(key_lvl3_max, s) )
+            spells_info_frame.slots.lvl4.var_max.set( saved.get(key_spell_slots, d).get(key_lvl4_max, s) )
+            spells_info_frame.slots.lvl5.var_max.set( saved.get(key_spell_slots, d).get(key_lvl5_max, s) )
+            spells_info_frame.slots.lvl6.var_max.set( saved.get(key_spell_slots, d).get(key_lvl6_max, s) )
+            spells_info_frame.slots.lvl7.var_max.set( saved.get(key_spell_slots, d).get(key_lvl7_max, s) )
+            spells_info_frame.slots.lvl8.var_max.set( saved.get(key_spell_slots, d).get(key_lvl8_max, s) )
+            spells_info_frame.slots.lvl9.var_max.set( saved.get(key_spell_slots, d).get(key_lvl9_max, s) )
+            spells_info_frame.slots.lvl1.var_used.set( saved.get(key_spell_slots, d).get(key_lvl1_used, s) )
+            spells_info_frame.slots.lvl2.var_used.set( saved.get(key_spell_slots, d).get(key_lvl2_used, s) )
+            spells_info_frame.slots.lvl3.var_used.set( saved.get(key_spell_slots, d).get(key_lvl3_used, s) )
+            spells_info_frame.slots.lvl4.var_used.set( saved.get(key_spell_slots, d).get(key_lvl4_used, s) )
+            spells_info_frame.slots.lvl5.var_used.set( saved.get(key_spell_slots, d).get(key_lvl5_used, s) )
+            spells_info_frame.slots.lvl6.var_used.set( saved.get(key_spell_slots, d).get(key_lvl6_used, s) )
+            spells_info_frame.slots.lvl7.var_used.set( saved.get(key_spell_slots, d).get(key_lvl7_used, s) )
+            spells_info_frame.slots.lvl8.var_used.set( saved.get(key_spell_slots, d).get(key_lvl8_used, s) )
+            spells_info_frame.slots.lvl9.var_used.set( saved.get(key_spell_slots, d).get(key_lvl9_used, s) )
 
             #spells
             if saved.get(key_spells) != None:
