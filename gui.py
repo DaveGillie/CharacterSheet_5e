@@ -693,7 +693,7 @@ class SheetTabs(ctk.CTkTabview):
     '''THIS IS WHERE THE MAGIC HAPPENS'''
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
-        self.configure(width=600, height=1000)
+        self.configure(width=900, height=1200)
 
         data = {}
 
@@ -1003,7 +1003,7 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.sheet_tabs = SheetTabs(self)
-        self.sheet_tabs.pack()
+        self.sheet_tabs.pack(expand=True, fill='both')
 
 
 if __name__ == '__main__':
